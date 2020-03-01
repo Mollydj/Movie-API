@@ -58,7 +58,7 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!');
 });
 app.use(myLogger);
- 
+
 // GET requests
 app.get('/movies', function(req, res) {
   res.json(topRomComs)
@@ -68,8 +68,6 @@ app.get('/', function(req, res) {
 });
 app.get('/documentation', function(req, res) {
   res.sendFile('public/documentation.html', { root : __dirname });
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
 });
 
 
