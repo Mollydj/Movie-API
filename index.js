@@ -39,6 +39,7 @@ app.get('/movies', function(req, res){
   });
 });
 
+
 //Return a list of all movies that match a title
 app.get('/movies/:title', (req, res) => {
   Movies.find({ Director : req.params.Title })
