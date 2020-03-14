@@ -1,11 +1,10 @@
 {
   "name": "movie_api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "start": "node index.js"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mollydj/Movie-API.git"
@@ -21,6 +20,11 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
-    "uuid": "^7.0.1"
-  }
+    "uuid": "^7.0.2",
+    "mongoose": "^5.7.1"
+  },
+  "devDependencies": {
+    "npm-start-command": "^1.0.0"
+  },
+  "description": ""
 }
