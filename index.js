@@ -2,9 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require("uuid");
-
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+
 const Movies = Models.Movie;
 const Users = Models.User;
 const app = express();
@@ -48,7 +48,7 @@ app.get('/movies/:title', (req, res) => {
   })
   .catch(function(err){
     console.error(err)
-    res.status(500.send("Error: " + err);
+    res.status(500).send("Error: " + err);
   });
 });
 
@@ -60,7 +60,7 @@ app.get('/movies/:director', (req, res) => {
   })
   .catch(function(err){
     console.error(err)
-    res.status(500.send("Error: " + err);
+    res.status(500).send("Error: " + err);
   });
 });
 
@@ -73,7 +73,7 @@ app.get('/movies/:genre', (req, res) => {
   })
   .catch(function(err){
     console.error(err)
-    res.status(500.send("Error: " + err);
+    res.status(500).send("Error: " + err);
   });
 });
 
