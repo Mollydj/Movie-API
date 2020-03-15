@@ -40,9 +40,9 @@ app.get('/movies', function(req, res){
 });
 
 app.get('/users', function(req, res){
-  Users.find()
-  .then(function(movies) {
-    res.status(201).json(movies)
+  Users.find() 
+  .then(function(users) {
+    res.status(201).json(users)
   })
   .catch(function(err) {
     console.error(err);
@@ -115,7 +115,9 @@ app.post('/users', function(req, res) {
   });
 });
 
-// POST //////////////////////////////////////////////
+
+
+// DELETE //////////////////////////////////////////////
 //Allow users to remove a movie from their list of favorites
 app.delete('/movies/:title', function(req, res) {
   Movies.findOneAndRemove({ Title: req.params.title })
@@ -131,6 +133,22 @@ app.delete('/movies/:title', function(req, res) {
     res.status(500).send("Error: " + err);
   });
 });
+
+app.delete('/users/:Username', function(req, res) {
+  Users.findOneAndRemove({ Username: req.params.Username })
+  .then(function(user) {
+    if (!user) {
+      res.status(400).send(req.params.Username + " was not found");
+    } else {
+      res.status(200).send(req.params.Username + " was deleted.");
+    }
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 
 // PUT //////////////////////////////////////////////
 //Allow users to update their user info
@@ -153,21 +171,7 @@ app.put('/users/:Username', function(req, res) {
   })
 });
 
-  //Allow users to add a movie to their list of favorites
-  app.post('/users/:Username/Movies/:MovieID', function(req, res) {
-    Users.findOneAndUpdate({ Username : req.params.Username }, {
-      $push : { FavoriteMovies : req.params.MovieID }
-    }),
-    { new : true }, // This line makes sure that the updated document is returned
-    function(err, updatedUser) {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser)
-      }
-    };
-  });
+
 
 
   // listen for requests
