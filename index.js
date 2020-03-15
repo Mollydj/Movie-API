@@ -1,12 +1,11 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require("uuid");
-const mongoose = require('mongoose');
-const Models = require('./models.js');
-
-const Movies = Models.Movie;
-const Users = Models.User;
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -26,10 +25,22 @@ app.use(function (err, req, res, next) {
 });
 
 
+
 // GET //////////////////////////////////////////////
-//All movies to the user
+//All movies to the user ok
 app.get('/movies', function(req, res){
   Movies.find()
+  .then(function(movies) {
+    res.status(201).json(movies)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
+app.get('/users', function(req, res){
+  Users.find()
   .then(function(movies) {
     res.status(201).json(movies)
   })
@@ -146,7 +157,7 @@ app.put('/users/:Username', function(req, res) {
   app.post('/users/:Username/Movies/:MovieID', function(req, res) {
     Users.findOneAndUpdate({ Username : req.params.Username }, {
       $push : { FavoriteMovies : req.params.MovieID }
-    },
+    }),
     { new : true }, // This line makes sure that the updated document is returned
     function(err, updatedUser) {
       if (err) {
@@ -155,7 +166,7 @@ app.put('/users/:Username', function(req, res) {
       } else {
         res.json(updatedUser)
       }
-    })
+    };
   });
 
 
