@@ -39,6 +39,17 @@ app.get('/movies', function(req, res){
   });
 });
 
+app.get('/users', function(req, res){
+  Users.find()
+  .then(function(user) {
+    res.status(201).json(user)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 //Return data of a movie by title to the user - 2
 app.get('/movies/:Title', function(req, res) {
   Movies.findOne({ Title : req.params.Title })
@@ -67,8 +78,8 @@ app.get('/movies/directors/:Name', (req, res) => {
 //Return data about a genre by name - 3
 app.get('/movies/Genres/:Name', (req, res) => {
   Movies.find({'Genre.Name': req.params.Name})
-  .then(function(movie){
-    res.json(movie)
+  .then(function(movies){
+    res.json(movies)
     })
   .catch(function(err) {
     console.error(err);
@@ -105,19 +116,19 @@ app.post('/users', function(req, res) {
 });
 
 // Allow users to add a movie to their lists - 9
-app.post('/users/:Username/Movies/:MovieID', function(req, res) {
-  Users.findOneAndUpdate({ Username : req.params.Username }, {
-    $push : { FavoriteMovies : req.params.MovieID }
+app.post('/users/:Username/Movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}, {
+    $push: {Favorites: [req.params.MovieID]}
   },
-  { new : true }, // This line makes sure that the updated document is returned
-  function(err, updatedUser) {
-    if (err) {
+  {new: true},
+  function(err, updatedUser){
+    if(err){
       console.error(err);
       res.status(500).send("Error: " + err);
-    } else {
-      res.json(updatedUser)
+    }else{
+      res.json(updatedUser);
     }
-  })
+  });
 });
 
 
@@ -125,8 +136,8 @@ app.post('/users/:Username/Movies/:MovieID', function(req, res) {
 //Allow users to remove a movie from their list of favorites - 7 
 app.delete('/movies/:title', function(req, res) {
   Movies.findOneAndRemove({ Title: req.params.title })
-  .then(function(users) {
-    if (!users) {
+  .then(function(user) {
+    if (!user) {
       res.status(400).send(req.params.Title + " was not found");
     } else {
       res.status(200).send(req.params.Title + " was deleted.");
@@ -175,9 +186,6 @@ app.put('/users/:Username', function(req, res) {
     }
   })
 });
-
-
-
 
   // listen for requests
   app.listen(8080, () =>
