@@ -27,7 +27,7 @@ app.use(function (err, req, res, next) {
 
 
 // GET //////////////////////////////////////////////
-//All movies to the user ok
+//All movies to the user ok - 1
 app.get('/movies', function(req, res){
   Movies.find()
   .then(function(movies) {
@@ -39,18 +39,7 @@ app.get('/movies', function(req, res){
   });
 });
 
-app.get('/users', function(req, res){
-  Users.find() 
-  .then(function(users) {
-    res.status(201).json(users)
-  })
-  .catch(function(err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-});
-
-//Return data of a movie by title to the user
+//Return data of a movie by title to the user - 2
 app.get('/movies/:Title', function(req, res) {
   Movies.findOne({ Title : req.params.Title })
   .then(function(movies) {
@@ -62,7 +51,7 @@ app.get('/movies/:Title', function(req, res) {
   });
 });
 
-// Return data about a director (bio, birth year, death year
+// Return data about a director by name - 4
 app.get('/movies/directors/:Name', (req, res) => {
   Movies.findOne({"Director.Name" : req.params.Name})
   .then(function(movies){
@@ -75,7 +64,7 @@ app.get('/movies/directors/:Name', (req, res) => {
 });
 
 
-//Return data about a genre (description) by name/title (e.g., “Thriller”
+//Return data about a genre by name - 3
 app.get('/movies/Genres/:Name', (req, res) => {
   Movies.find({'Genre.Name': req.params.Name})
   .then(function(movie){
@@ -89,7 +78,7 @@ app.get('/movies/Genres/:Name', (req, res) => {
 
 
 // POST //////////////////////////////////////////////
-// Allows users to register
+// Allows users to register - 5
 app.post('/users', function(req, res) {
   Users.findOne({ Username : req.body.Username })
   .then(function(user) {
@@ -115,10 +104,25 @@ app.post('/users', function(req, res) {
   });
 });
 
+// Allow users to add a movie to their lists - 9
+app.post('/users/:Username/Movies/:MovieID', function(req, res) {
+  Users.findOneAndUpdate({ Username : req.params.Username }, {
+    $push : { FavoriteMovies : req.params.MovieID }
+  },
+  { new : true }, // This line makes sure that the updated document is returned
+  function(err, updatedUser) {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    } else {
+      res.json(updatedUser)
+    }
+  })
+});
 
 
 // DELETE //////////////////////////////////////////////
-//Allow users to remove a movie from their list of favorites
+//Allow users to remove a movie from their list of favorites - 7 
 app.delete('/movies/:title', function(req, res) {
   Movies.findOneAndRemove({ Title: req.params.title })
   .then(function(users) {
@@ -134,6 +138,7 @@ app.delete('/movies/:title', function(req, res) {
   });
 });
 
+//Allows users to deregister - 8
 app.delete('/users/:Username', function(req, res) {
   Users.findOneAndRemove({ Username: req.params.Username })
   .then(function(user) {
@@ -151,7 +156,7 @@ app.delete('/users/:Username', function(req, res) {
 
 
 // PUT //////////////////////////////////////////////
-//Allow users to update their user info
+//Allow users to update their user info - 6
 app.put('/users/:Username', function(req, res) {
   Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
   {
