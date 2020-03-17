@@ -1,12 +1,22 @@
-const mongoose = require('mongoose');
-const Models = require('./models.js');
-const Movies = Models.Movie;
-const Users = Models.User;
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require("uuid");
 const app = express();
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+
+
+const passport = require('passport');
+require('./passport');
+
+
+
 
 mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -15,7 +25,7 @@ mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, 
 app.use(express.static("public"));
 app.use(morgan("common")); // Logging with Morgan
 app.use(bodyParser.json()); // Using bodyParser
-
+var auth = require('./auth')(app);
 
 //ERROR HANDLING
 app.use(function (err, req, res, next) {
@@ -28,7 +38,7 @@ app.use(function (err, req, res, next) {
 
 // GET //////////////////////////////////////////////
 //All movies to the user ok - 1
-app.get('/movies', function(req, res){
+app.get('/movies', passport.authenticate('jwt', {session: false}), function(req, res){
   Movies.find()
   .then(function(movies) {
     res.status(201).json(movies)
@@ -63,7 +73,7 @@ app.get('/movies/:Title', function(req, res) {
 });
 
 // Return data about a director by name - 4
-app.get('/movies/directors/:Name', (req, res) => {
+app.get('/movies/directors/:Name',(req, res) => {
   Movies.findOne({"Director.Name" : req.params.Name})
   .then(function(movies){
     res.json(movies.Director)
@@ -134,7 +144,7 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 
 // DELETE //////////////////////////////////////////////
 //Allow users to remove a movie from their list of favorites - 7 
-app.delete('/movies/:title', function(req, res) {
+app.delete('/movies/:title',  function(req, res) {
   Movies.findOneAndRemove({ Title: req.params.title })
   .then(function(user) {
     if (!user) {
