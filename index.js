@@ -5,14 +5,10 @@ const uuid = require("uuid");
 const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-
-
+const passport = require('passport');
 const Movies = Models.Movie;
 const Users = Models.User;
-
-
-
-const passport = require('passport');
+const cors = require('cors');
 require('./passport');
 
 
@@ -25,6 +21,7 @@ mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, 
 app.use(express.static("public"));
 app.use(morgan("common")); // Logging with Morgan
 app.use(bodyParser.json()); // Using bodyParser
+app.use(cors());
 var auth = require('./auth')(app);
 
 
@@ -121,25 +118,26 @@ app.post('/users', passport.authenticate('jwt', {session: false}), function(req,
 });
 
 // Allow users to add a movie to their lists - 9
-app.post('/users/:Username/Movies/:MovieID',passport.authenticate('jwt', {session: false}), (req, res) => {
-  Users.findOneAndUpdate({Username: req.params.Username}, {
-    $push: {Favorites: [req.params.MovieID]}
+app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', {session: false}), function(req, res) {
+  Users.findOneAndUpdate({ Username : req.params.Username }, {
+    $push : { FavoriteMovies : [req.params.MovieID] }
   },
-  {new: true},
-  function(err, updatedUser){
-    if(err){
+  { new : true }, // This line makes sure that the updated document is returned
+  function(err, updatedUser) {
+    if (err) {
       console.error(err);
       res.status(500).send("Error: " + err);
-    }else{
-      res.json(updatedUser);
+    } else {
+      res.json(updatedUser)
     }
-  });
+  })
 });
+
 
 
 // DELETE //////////////////////////////////////////////
 //Allow users to remove a movie from their list of favorites - 7 
-app.delete('/movies/:title', passport.authenticate('jwt', {session: false}), function(req, res) {
+/*app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', {session: false}), function(req, res) {
   Movies.findOneAndRemove({ Title: req.params.title })
   .then(function(user) {
     if (!user) {
@@ -152,7 +150,29 @@ app.delete('/movies/:title', passport.authenticate('jwt', {session: false}), fun
     console.error(err);
     res.status(500).send("Error: " + err);
   });
-});
+});*/
+
+app.delete(
+  "/users/:Username/Movies/:MovieID",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      { $pull: { FavoriteMovies: req.params.MovieID } },
+      { new: true }, // This line makes sure that the updated document is returned
+      (error, updatedUser) => {
+        if (error) {
+          console.error(error);
+          res.status(500).send("Error: " + error);
+        } else {
+          res.json(updatedUser);
+        }
+      }
+    );
+  }
+);
+
+
 
 //Allows users to deregister - 8
 app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), function(req, res) {
