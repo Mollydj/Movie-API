@@ -24,8 +24,6 @@ app.use(morgan("common")); // Logging with Morgan
 app.use(bodyParser.json()); // Using bodyParser
 app.use(cors());
 var auth = require('./auth')(app);
-
-
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
@@ -36,9 +34,6 @@ app.use(cors({
     return callback(null, true);
   }
 }));
-
-
-
 
 // GET //////////////////////////////////////////////
 //All movies to the user ok - 1
@@ -250,5 +245,6 @@ app.use(function (err, req, res, next) {
 // listen for requests
 var port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function() {
-console.log(`Listening on Port ${port}`);
+console.log(`Listening on the Port ${port}`);
 });  
+
