@@ -16,7 +16,7 @@ const { check, validationResult } = require('express-validator');
 var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 // LOCAL mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true }');
 
 //MIDDLEWARE
 app.use(express.static("public"));
