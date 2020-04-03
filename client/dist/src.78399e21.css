@@ -62,4 +62,12 @@ div {
   margin: 0 auto;
 }
 
+@media (min-width: 57em) {
+  .card-columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+
 /*# sourceMappingURL=/src.78399e21.css.map */
