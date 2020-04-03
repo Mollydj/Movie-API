@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
+import Button from "react-bootstrap/Button";
 
 export class MovieView extends React.Component {
-
   constructor() {
     super();
 
@@ -14,7 +14,7 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="movie-view">
+      <div className="movie-view" variant="light">
         <img className="movie-poster" src={movie.ImagePath} width="200px" />
         <div className="movie-title">
           <span className="label">Title: </span>
@@ -34,8 +34,6 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Director.Name}</span>
         </div>
       </div>
-
-
     );
   }
 }
