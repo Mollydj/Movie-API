@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FormControl, Label, Button, Form } from "react-bootstrap";
 
 export function NewUser(props) {
   const [username, setUsername] = useState("");
@@ -15,47 +16,47 @@ export function NewUser(props) {
   return (
     <div className="main-view">
       <header className="big-blue-text">MyFlix</header>
-      <form>
-        <label>
+      <Form>
+        <Form.Label>
           Username:
-          <input
+          <Form.Control
             type="text"
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
-        </label>
+        </Form.Label>
         <br />
-        <label>
+        <Form.Label>
           Password:
-          <input
+          <Form.Control
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-        </label>
+        </Form.Label>
         <br />
-        <label>
+        <Form.Label>
           Email:
-          <input
+          <Form.Control
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-        </label>
+        </Form.Label>
         <br />
-        <label>
+        <Form.Label>
           Birthday:
-          <input
+          <Form.Control
             type="birthday"
             value={birthday}
             onChange={e => setBirthday(e.target.value)}
           />
-        </label>
+        </Form.Label>
         <br />
         <button type="button" className="btn btn-blue" onClick={handleSubmit}>
           Submit
         </button>
-      </form>
+      </Form>
     </div>
   );
 }
