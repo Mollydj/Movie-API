@@ -62,7 +62,7 @@ export class MainView extends React.Component {
     if (!movies) return <div className="main-view" />;
 
     return (
-      <div className="main-view card-columns mw-75">
+      <div className="main-view card-columns">
         {selectedMovie ? (
           <MovieView movie={selectedMovie} />
         ) : (
