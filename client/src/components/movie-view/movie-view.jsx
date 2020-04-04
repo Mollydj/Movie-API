@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
+import { MovieCard } from "../movie-card/movie-card";
 
 export class MovieView extends React.Component {
   constructor() {
@@ -37,3 +39,7 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.string
+};
