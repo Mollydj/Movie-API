@@ -27,7 +27,7 @@ export class MainView extends React.Component {
           movies: response.data
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -66,15 +66,16 @@ export class MainView extends React.Component {
         {selectedMovie ? (
           <MovieView movie={selectedMovie} />
         ) : (
-          movies.map(movie => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onClick={movie => this.onMovieClick(movie)}
-            />
-          ))
-        )}
+            movies.map(movie => (
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onClick={movie => this.onMovieClick(movie)}
+              />
+            ))
+          )}
       </div>
     );
   }
 }
+
