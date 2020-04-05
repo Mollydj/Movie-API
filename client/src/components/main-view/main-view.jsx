@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 import { LoginView } from "../login-view/login-view";
 import { NewUser } from "../registration-view/registration-view";
@@ -79,3 +80,11 @@ export class MainView extends React.Component {
   }
 }
 
+MainView.propTypes = {
+  movies: PropTypes.string,
+  selectedMovie: PropTypes.string,
+  user: PropTypes.string,
+  newbie: PropTypes.string
+}.isRequired, {
+  onClick: PropTypes.func.isRequired
+};

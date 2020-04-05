@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { FormControl, Label, Button, Form } from "react-bootstrap";
 
 export function LoginView(props) {
@@ -39,4 +40,13 @@ export function LoginView(props) {
       </Form>
     </div>
   );
+}
+
+LoginView.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string,
+  setUsername: PropTypes.string,
+  setPassword: PropTypes.string
+}.isRequired, {
+  onClick: PropTypes.func.isRequired
 }

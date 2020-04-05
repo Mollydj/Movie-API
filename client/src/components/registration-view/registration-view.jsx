@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { FormControl, Label, Button, Form } from "react-bootstrap";
 
 export function NewUser(props) {
@@ -59,4 +60,13 @@ export function NewUser(props) {
       </Form>
     </div>
   );
+}
+
+NewUser.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string,
+  email: PropTypes.string,
+  birthday: PropTypes.string
+}.isRequired, {
+  onClick: PropTypes.func.isRequired
 }
