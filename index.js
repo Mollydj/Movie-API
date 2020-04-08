@@ -1,8 +1,8 @@
+
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require("uuid");
-const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const passport = require('passport');
@@ -12,8 +12,13 @@ const cors = require('cors');
 require('./passport');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
+const app = express();
 
-var allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
+const allowedOrigins = [
+  'http://localhost:1234',
+  'https://ach2.herokuapp.com'
+];
+
 
 // LOCAL mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -21,6 +26,7 @@ mongoose.connect('mongodb+srv://mollydj:Iminnorush1@myflixdb-yyhj5.mongodb.net/m
 
 
 //MIDDLEWARE
+
 app.use(express.static("public"));
 app.use(morgan("common")); // Logging with Morgan
 app.use(bodyParser.json()); // Using bodyParser
@@ -36,6 +42,8 @@ app.use(cors({
     return callback(null, true);
   }
 }));
+
+
 
 // GET //////////////////////////////////////////////
 //All movies to the user ok - 1
@@ -249,4 +257,3 @@ var port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function () {
   console.log(`Listening on the Port ${port}`);
 });
-
