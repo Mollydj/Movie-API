@@ -1,25 +1,17 @@
-
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const uuid = require("uuid");
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const passport = require('passport');
 const Movies = Models.Movie;
 const Users = Models.User;
-const cors = require('cors');
 require('./passport');
-const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
+
+
 const app = express();
-
-
-const allowedOrigins = [
-  'http://localhost:1234',
-  'https://ach2.herokuapp.com'
-];
-
+const cors = require('cors');
 
 // LOCAL mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -27,14 +19,19 @@ mongoose.connect('mongodb+srv://mollydj:Iminnorush1@myflixdb-yyhj5.mongodb.net/m
 
 
 //MIDDLEWARE
+app.use(cors());
 
 app.use(express.static("public"));
 app.use(morgan("common")); // Logging with Morgan
 app.use(bodyParser.json()); // Using bodyParser
-app.use(cors());
 var auth = require('./auth')(app);
 
+//ERROR HANDLING
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 
 // GET //////////////////////////////////////////////
@@ -110,7 +107,7 @@ app.post('/users',
   ],
   (req, res) => {
     var errors = validationResult(req);
-    if (!error.isEmpty()) {
+    if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
     var hashedPassword = Users.hashPassword(req.body.Password);
@@ -124,7 +121,7 @@ app.post('/users',
           Users
             .create({
               Username: req.body.Username,
-              Password: req.body.Password,
+              Password: hashedPassword,
               Email: req.body.Email,
               Birthday: req.body.Birthday
             })
@@ -237,15 +234,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), fu
     })
 });
 
-//ERROR HANDLING
-app.use(function (err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-  next();
-});
 
 // listen for requests
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function () {
   console.log(`Listening on the Port ${port}`);
 });

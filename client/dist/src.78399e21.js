@@ -45350,7 +45350,7 @@ function LoginView(props) {
     e.preventDefault();
     /* Send a request to the server for authentication */
 
-    _axios.default.post('https://ach2.herokuapp.com/login', {
+    _axios.default.post("http://localhost:3000/login", {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -46008,7 +46008,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56209" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49686" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
