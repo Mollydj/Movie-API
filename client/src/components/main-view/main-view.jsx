@@ -50,10 +50,25 @@ export class MainView extends React.Component {
     this.setState({
       user: authData.user.Username
     });
-
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+  }
+
+  getMovies(token) {
+    axios.get('https://ach2.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+      //By passing bearer authorization in the header of your HTTP requests, you can make authenticated requests to your API.
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {

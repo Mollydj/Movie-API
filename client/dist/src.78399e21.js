@@ -45790,15 +45790,38 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(authData) {
+      console.log(authData);
       this.setState({
-        user: user
+        user: authData.user.Username
+      });
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('user', authData.user.Username);
+      this.getMovies(authData.token);
+    }
+  }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this3 = this;
+
+      _axios.default.get('https://ach2.herokuapp.com/movies', {
+        headers: {
+          Authorization: "Bearer ".concat(token) //By passing bearer authorization in the header of your HTTP requests, you can make authenticated requests to your API.
+
+        }
+      }).then(function (response) {
+        // Assign the result to the state
+        _this3.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
@@ -45807,12 +45830,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           newbie = _this$state.newbie;
       if (!newbie) return _react.default.createElement(_registrationView.NewUser, {
         onNewUser: function onNewUser(newbie) {
-          return _this3.onNewUser(newbie);
+          return _this4.onNewUser(newbie);
         }
       });
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
+          return _this4.onLoggedIn(user);
         }
       }); // Before the movies have been loaded
 
@@ -45828,7 +45851,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           key: movie._id,
           movie: movie,
           onClick: function onClick(movie) {
-            return _this3.onMovieClick(movie);
+            return _this4.onMovieClick(movie);
           }
         });
       }));
@@ -46008,7 +46031,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57631" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53694" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
