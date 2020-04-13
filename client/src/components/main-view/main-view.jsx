@@ -21,7 +21,7 @@ export class MainView extends React.Component {
 
   componentDidMount() {
     axios
-      .get('https://ach2.herokuapp.com/movies')
+      .get('http://ach2.herokuapp.com/movies')
       .then(response => {
         // Assign the result to the state
         this.setState({
@@ -56,7 +56,7 @@ export class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('https://ach2.herokuapp.com/movies', {
+    axios.get('http://ach2.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
       //By passing bearer authorization in the header of your HTTP requests, you can make authenticated requests to your API.
     })
