@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FormControl, Label, Button, Form } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
@@ -49,9 +49,17 @@ export function LoginView(props) {
           />
         </Form.Label>
         <br />
+
         <button type="button" className="btn btn-blue" onClick={handleSubmit}>
           Submit
         </button>
+
+        <br /><br />
+
+        <Link to={`/register`}>
+          <Button type="button" className="btn btn-blue" variant="link">Sign Up!</Button>
+        </Link>
+
       </Form>
     </div>
   );

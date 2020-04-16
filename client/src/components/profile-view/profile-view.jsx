@@ -1,36 +1,85 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { FormControl, Label, Button, Form } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
+export function ProfileView(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
 
-//export means it can be imported from another place
-export class ProfileView extends React.Component {
-  render() {
-    // This is given to the <MovieCard/> component by the outer world
-    // which, in this case, is `MainView`, as `MainView` is what’s
-    // connected to your database via the movies endpoint of your API
-    const { user } = this.props;
-
-    if (!user) return null;
-
-    return (
-      <div className="profile-view">
-
-        <Card style={{ width: '34rem' }}>
-          <Card.Body>
-            <Card.Title><h1>{user.Username}</h1></Card.Title>
-            <Card.Text>
-            </Card.Text>
-            <Link to={`/`}>
-              <Button variant="link">Back to Movies</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </div>
-
-    );
+  function getUser() {
+    //e.preventDefault();
+    axios.get('http://ach2.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+      })
+      .catch(e => {
+        console.log('error registering the user')
+      });
   }
+
+  return (
+    <div className="main-view">
+
+      <header className="big-blue-text">Update Profile</header>
+      <Form>
+        <Form.Label>
+          Username:
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
+        </Form.Label>
+        <br />
+        <Form.Label>
+          Password:
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </Form.Label>
+        <br />
+        <Form.Label>
+          Email:
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </Form.Label>
+        <br />
+        <Form.Label>
+          Birthday:
+          <Form.Control
+            type="birthday"
+            value={birthday}
+            onChange={e => setBirthday(e.target.value)}
+          />
+        </Form.Label>
+        <br />
+        <button type="button" className="btn btn-blue" onClick={getUser}>
+          Submit
+        </button>
+      </Form>
+    </div>
+  );
+}
+
+ProfileView.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string,
+  email: PropTypes.string,
+  birthday: PropTypes.string
+}.isRequired, {
+  onClick: PropTypes.func.isRequired
 }

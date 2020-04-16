@@ -58,6 +58,8 @@ app.get('/users/:Username', function (req, res) {
     });
 });
 
+
+
 //Return data of a movie by title to the user - 2
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), function (req, res) {
   Movies.findOne({ Title: req.params.Title })

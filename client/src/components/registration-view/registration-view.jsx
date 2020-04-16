@@ -10,7 +10,7 @@ export function NewUser(props) {
 
   function handleSubmit() {
     //e.preventDefault();
-    axios.post('http://ach2.herokuapp.com/users', {
+    axios.get('http://ach2.herokuapp.com/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -28,6 +28,7 @@ export function NewUser(props) {
 
   return (
     <div className="main-view">
+
       <header className="big-blue-text">MyFlix</header>
       <Form>
         <Form.Label>
