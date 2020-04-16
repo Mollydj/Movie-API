@@ -49022,7 +49022,7 @@ function ProfileView(props) {
 
   function getUser() {
     //e.preventDefault();
-    axios.get('http://ach2.herokuapp.com/users', {
+    axios.get('http://ach2.herokuapp.com/users/:Username', {
       Username: username,
       Password: password,
       Email: email,
@@ -49072,12 +49072,13 @@ function ProfileView(props) {
 }
 
 ProfileView.propTypes = {
-  username: _propTypes.default.string,
-  password: _propTypes.default.string,
-  email: _propTypes.default.string,
-  birthday: _propTypes.default.string
-}.isRequired, {
-  onClick: _propTypes.default.func.isRequired
+  user: _propTypes.default.arrayOf(_propTypes.default.shape({
+    _id: _propTypes.default.string,
+    Username: _propTypes.default.string,
+    Password: _propTypes.default.string,
+    Email: _propTypes.default.string,
+    Birthday: _propTypes.default.string
+  }))
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/navbar-view/navbar-view":[function(require,module,exports) {
 module.exports="/d7396fd9bef4a93558cf660f2122fc08.";

@@ -10,7 +10,7 @@ export function ProfileView(props) {
 
   function getUser() {
     //e.preventDefault();
-    axios.get('http://ach2.herokuapp.com/users', {
+    axios.get('http://ach2.herokuapp.com/users/:Username', {
       Username: username,
       Password: password,
       Email: email,
@@ -19,12 +19,16 @@ export function ProfileView(props) {
       .then(response => {
         const data = response.data;
         console.log(data);
+
         window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
       })
       .catch(e => {
         console.log('error registering the user')
       });
+
   }
+
+
 
   return (
     <div className="main-view">
@@ -76,10 +80,14 @@ export function ProfileView(props) {
 }
 
 ProfileView.propTypes = {
-  username: PropTypes.string,
-  password: PropTypes.string,
-  email: PropTypes.string,
-  birthday: PropTypes.string
-}.isRequired, {
-  onClick: PropTypes.func.isRequired
+  user: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      Username: PropTypes.string,
+      Password: PropTypes.string,
+      Email: PropTypes.string,
+      Birthday: PropTypes.string,
+
+    })
+  ),
 }
