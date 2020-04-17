@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FormControl, Label, Button, Form } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import axios from "axios";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function ProfileView(props) {
   const [username, setUsername] = useState("");
@@ -25,57 +29,26 @@ export function ProfileView(props) {
       .catch(e => {
         console.log('error registering the user')
       });
-
+    console.log(Username)
   }
 
 
 
+
   return (
+
+
     <div className="main-view">
 
-      <header className="big-blue-text">Update Profile</header>
-      <Form>
-        <Form.Label>
-          Username:
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-        </Form.Label>
-        <br />
-        <Form.Label>
-          Password:
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </Form.Label>
-        <br />
-        <Form.Label>
-          Email:
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </Form.Label>
-        <br />
-        <Form.Label>
-          Birthday:
-          <Form.Control
-            type="birthday"
-            value={birthday}
-            onChange={e => setBirthday(e.target.value)}
-          />
-        </Form.Label>
-        <br />
-        <button type="button" className="btn btn-blue" onClick={getUser}>
-          Submit
-        </button>
-      </Form>
-    </div>
+      <header className="big-blue-text"><h1>Profile</h1></header>
+      <Card style={{ width: '30rem' }}>
+        <Card.Body>
+          <h3>Username:</h3>
+          <h3>Email:</h3>
+          <h3>Birthday:</h3>
+        </Card.Body>
+      </Card>
+    </div >
   );
 }
 

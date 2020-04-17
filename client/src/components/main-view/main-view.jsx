@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from 'react-bootstrap/Navbar';
-
+import Button from 'react-bootstrap/Button';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
+import { LogoutView } from "../login-view/logout-view";
 import { NewUser } from "../registration-view/registration-view";
 import { GenreView } from "../genre-view/genre-view";
 import { DirectorView } from "../director-view/director-view";
@@ -46,7 +47,8 @@ export class MainView extends React.Component {
 
 
 
-  componentDidMount() {
+
+  componentDidMount(token) {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -54,8 +56,15 @@ export class MainView extends React.Component {
       });
       this.getMovies(accessToken);
 
-
     }
+    axios.get('http://ach2.herokuapp.com/users/:Username')
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
   }
 
 
@@ -80,18 +89,21 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+  }
 
-
+  onLoggedOut(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username
+    });
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
   }
 
 
-  onLoggedOut(authData) {
-    this.setState({
-      user: ''
-    });
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-
+  logout() {
+    localStorage.clear();
+    console.log('user logged out');
   }
 
 
@@ -99,6 +111,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, user } = this.state;
 
+    var logout = this.logout();
 
     return (
       <div className="main-view">
@@ -111,6 +124,12 @@ export class MainView extends React.Component {
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav mr-auto text-orange">
                 <li className="navbar-item">
+                  <Link to={`/users/:Username`}>
+                    <Button variant="link" className="text-dark">Profile</Button>
+                  </Link>
+                  <Link to={`/logout`}>
+                    <Button variant="link" className="text-dark" onClick={logout}>Logout</Button>
+                  </Link>
                 </li>
               </ul>
               {user}
@@ -127,9 +146,9 @@ export class MainView extends React.Component {
 
           <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
 
-          <Route exact path="/directors/:name" render={({ match }) => {
-            if (!movies || movies.length === 0) return <div className="main-view" />;
-            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} movies={movies} />
+          <Route path="/directors/:name" render={({ match }) => {
+            if (!movies) return <div className="main-view" />;
+            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
           }
           } />
           <Route exact path="/Genres/:name" render={({ match }) => {
@@ -140,9 +159,10 @@ export class MainView extends React.Component {
 
           <Route path="/users/:Username" render={() => <ProfileView />} />
 
+          <Route path="/logout" render={() => <LogoutView />} />
 
         </Router>
-      </div>
+      </div >
     );
   }
 }

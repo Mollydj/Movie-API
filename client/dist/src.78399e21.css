@@ -49,6 +49,7 @@ div {
 .text-orange:hover {
   color: var(--fourth-color);
   text-decoration: none;
+  border: none;
 }
 
 .text-green {
@@ -61,7 +62,7 @@ div {
 .btn-blue {
   font-family: "Abril Fatface", cursive;
   background-color: var(--fourth-color);
-  color: var(--third-color-lighter);
+  color: var(--third-color);
 }
 
 .ul {
