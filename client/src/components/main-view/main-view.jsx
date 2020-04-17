@@ -191,7 +191,7 @@ MainView.propTypes = {
       Actors: PropTypes.array
     })
   ),
-  userProfile: PropTypes.arrayOf(
+  users: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,
       Username: PropTypes.string,

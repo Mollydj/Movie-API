@@ -49020,23 +49020,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProfileView = ProfileView;
 
+var _axios = _interopRequireDefault(require("axios"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _reactBootstrap = require("react-bootstrap");
 
-var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
-
-var _axios = _interopRequireDefault(require("axios"));
-
 var _reactRouterDom = require("react-router-dom");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -49059,57 +49057,60 @@ function ProfileView(props) {
   var _useState3 = (0, _react.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
       password = _useState4[0],
-      setPassword = _useState4[1];
+      setPassword = _useState4[1]; //https://ach2.herokuapp.com/login
 
-  var _useState5 = (0, _react.useState)(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      email = _useState6[0],
-      setEmail = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(""),
-      _useState8 = _slicedToArray(_useState7, 2),
-      birthday = _useState8[0],
-      setBirthday = _useState8[1];
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    /* Send a request to the server for authentication */
 
-  function getUser() {
-    //e.preventDefault();
-    _axios.default.get('http://ach2.herokuapp.com/users/:Username', {
+    _axios.default.post("http://ach2.herokuapp.com/users/:Username", {
       Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
+      Password: password
     }).then(function (response) {
       var data = response.data;
-      console.log(data);
-      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+      props.onLoggedIn(data);
     }).catch(function (e) {
-      console.log('error registering the user');
+      console.log('no such user');
     });
-
-    console.log(Username);
-  }
+  };
 
   return _react.default.createElement("div", {
     className: "main-view"
   }, _react.default.createElement("header", {
     className: "big-blue-text"
-  }, _react.default.createElement("h1", null, "Profile")), _react.default.createElement(_Card.default, {
-    style: {
-      width: '30rem'
+  }, "MyFlix"), _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username:", _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "text",
+    value: username,
+    onChange: function onChange(e) {
+      return setUsername(e.target.value);
     }
-  }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("h3", null, "Username:"), _react.default.createElement("h3", null, "Email:"), _react.default.createElement("h3", null, "Birthday:"))));
+  })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form.Label, null, "Password:", _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "password",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    }
+  })), _react.default.createElement("br", null), _react.default.createElement("button", {
+    type: "button",
+    className: "btn btn-blue",
+    onClick: handleSubmit
+  }, "Submit"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/register"
+  }, _react.default.createElement(_reactBootstrap.Button, {
+    type: "button",
+    className: "btn btn-blue",
+    variant: "link"
+  }, "Sign Up!"))));
 }
 
 ProfileView.propTypes = {
-  user: _propTypes.default.arrayOf(_propTypes.default.shape({
-    _id: _propTypes.default.string,
-    Username: _propTypes.default.string,
-    Password: _propTypes.default.string,
-    Email: _propTypes.default.string,
-    Birthday: _propTypes.default.string
-  }))
+  username: _propTypes.default.string,
+  password: _propTypes.default.string
+}.isRequired, {
+  onClick: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/navbar-view/navbar-view":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/navbar-view/navbar-view":[function(require,module,exports) {
 module.exports="/d7396fd9bef4a93558cf660f2122fc08.";
 },{}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
@@ -49405,7 +49406,7 @@ MainView.propTypes = {
     Featured: _propTypes.default.boolean,
     Actors: _propTypes.default.array
   })),
-  userProfile: _propTypes.default.arrayOf(_propTypes.default.shape({
+  users: _propTypes.default.arrayOf(_propTypes.default.shape({
     _id: _propTypes.default.string,
     Username: _propTypes.default.string,
     Password: _propTypes.default.string,
@@ -49507,7 +49508,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58917" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63927" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

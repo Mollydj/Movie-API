@@ -47,7 +47,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), function (r
     });
 });
 
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), function (req, res) {
+app.get('/users/:Username', function (req, res) {
   Users.findOne({ Username: req.params.Username })
     .then(function (user) {
       res.status(201).json(user)
