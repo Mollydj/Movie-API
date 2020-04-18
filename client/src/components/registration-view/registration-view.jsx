@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FormControl, Label, Button, Form } from "react-bootstrap";
+import axios from "axios";
 
 export function NewUser(props) {
   const [username, setUsername] = useState("");

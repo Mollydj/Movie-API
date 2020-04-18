@@ -45,7 +45,21 @@ export class MainView extends React.Component {
       });
   }
 
-
+  getUsers(token) {
+    axios.get('http://ach2.herokuapp.com/users/:Username', {
+      headers: { Authorization: `Bearer ${token}` }
+      //By passing bearer authorization in the header of your HTTP requests, you can make authenticated requests to your API.
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          users: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
 
   componentDidMount(token) {
@@ -57,14 +71,6 @@ export class MainView extends React.Component {
       this.getMovies(accessToken);
 
     }
-    axios.get('http://ach2.herokuapp.com/users/:Username')
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
   }
 
 
@@ -159,6 +165,7 @@ export class MainView extends React.Component {
 
           <Route path="/users/:Username" render={() => <ProfileView />} />
 
+
           <Route path="/logout" render={() => <LogoutView />} />
 
         </Router>
@@ -191,7 +198,7 @@ MainView.propTypes = {
       Actors: PropTypes.array
     })
   ),
-  users: PropTypes.arrayOf(
+  ProfileView: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,
       Username: PropTypes.string,
