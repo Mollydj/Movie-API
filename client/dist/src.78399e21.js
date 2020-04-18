@@ -48642,18 +48642,26 @@ function LoginView(props) {
     className: "main-view"
   }, _react.default.createElement("header", {
     className: "big-blue-text"
-  }, "MyFlix"), _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username:", _react.default.createElement(_reactBootstrap.Form.Control, {
+  }, "MyFlix"), _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Group, {
+    controlid: "formBasicUsername"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, " Username:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "text",
+    placeholder: "Username",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
-    }
-  })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form.Label, null, "Password:", _react.default.createElement(_reactBootstrap.Form.Control, {
+    },
+    required: true
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    controlid: "formBasicPassword"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
+    placeholder: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
-    }
+    },
+    required: true
   })), _react.default.createElement("br", null), _react.default.createElement("button", {
     type: "button",
     className: "btn btn-blue",
@@ -48718,7 +48726,12 @@ function LogoutView(props) {
     variant: "link"
   }, "Login")));
 }
-},{"axios":"../node_modules/axios/index.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48728,11 +48741,23 @@ exports.NewUser = NewUser;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _reactBootstrap = require("react-bootstrap");
+var _reactRouterDom = require("react-router-dom");
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+require("./registration-view.scss");
+
+var _reactBootstrap = require("react-bootstrap");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48753,86 +48778,93 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function NewUser(props) {
-  var _useState = (0, _react.useState)(""),
+  var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
       setUsername = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(""),
+  var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
       password = _useState4[0],
       setPassword = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(""),
+  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
       email = _useState6[0],
       setEmail = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(""),
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  function handleSubmit() {
-    //e.preventDefault();
-    _axios.default.get('http://ach2.herokuapp.com/users', {
+  var handleSignUp = function handleSignUp(e) {
+    e.preventDefault();
+
+    _axios.default.post('https://ach2.herokuapp.com/users', {
       Username: username,
       Password: password,
       Email: email,
       Birthday: birthday
     }).then(function (response) {
       var data = response.data;
-      console.log(data);
-      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
-    }).catch(function (e) {
-      console.log('error registering the user');
+      alert('Registration successful! Click OK to log in.');
+      window.open('/', '_self');
+    }).catch(function (error) {
+      console.log('error registering the user' + error);
     });
-  }
+  };
 
   return _react.default.createElement("div", {
-    className: "main-view"
+    className: "registration-view"
   }, _react.default.createElement("header", {
     className: "big-blue-text"
-  }, "MyFlix"), _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username:", _react.default.createElement(_reactBootstrap.Form.Control, {
+  }, "Sign Up"), _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+    controlid: "formBasicUsername"
+  }, _react.default.createElement(_Form.default.Label, null, " Username:"), _react.default.createElement(_Form.default.Control, {
     type: "text",
+    placeholder: "Username",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
-    }
-  })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form.Label, null, "Password:", _react.default.createElement(_reactBootstrap.Form.Control, {
+    },
+    required: true
+  })), _react.default.createElement(_Form.default.Group, {
+    controlid: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
     type: "password",
+    placeholder: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
-    }
-  })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form.Label, null, "Email:", _react.default.createElement(_reactBootstrap.Form.Control, {
+    },
+    required: true
+  })), _react.default.createElement(_Form.default.Group, {
+    controlid: "formBasicEmail"
+  }, _react.default.createElement(_Form.default.Label, null, "Email:"), _react.default.createElement(_Form.default.Control, {
     type: "email",
+    placeholder: "Email",
     value: email,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
-    }
-  })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday:", _react.default.createElement(_reactBootstrap.Form.Control, {
-    type: "birthday",
+    },
+    required: true
+  })), _react.default.createElement(_Form.default.Group, {
+    controlid: "formBasicBirthday"
+  }, _react.default.createElement(_Form.default.Label, null, "Birthday:"), _react.default.createElement(_Form.default.Control, {
+    type: "date",
     value: birthday,
     onChange: function onChange(e) {
       return setBirthday(e.target.value);
-    }
-  })), _react.default.createElement("br", null), _react.default.createElement("button", {
-    type: "button",
+    },
+    required: true
+  })), _react.default.createElement("button", {
     className: "btn btn-blue",
-    onClick: handleSubmit
+    type: "submit",
+    onClick: handleSignUp
   }, "Submit")));
 }
-
-NewUser.propTypes = {
-  username: _propTypes.default.string,
-  password: _propTypes.default.string,
-  email: _propTypes.default.string,
-  birthday: _propTypes.default.string
-}.isRequired, {
-  onClick: _propTypes.default.func.isRequired
-};
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","./registration-view.scss":"components/registration-view/registration-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49020,96 +49052,72 @@ DirectorView.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProfileView = ProfileView;
+exports.default = exports.ProfileView = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
+var _propTypes = require("prop-types");
 
-var _reactBootstrap = require("react-bootstrap");
-
-var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
-
-var _axios = _interopRequireDefault(require("axios"));
-
-var _reactRouterDom = require("react-router-dom");
+var _mainView = require("../main-view/main-view");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-function ProfileView(props) {
-  var _useState = (0, _react.useState)(""),
-      _useState2 = _slicedToArray(_useState, 2),
-      username = _useState2[0],
-      setUsername = _useState2[1];
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-  var _useState3 = (0, _react.useState)(""),
-      _useState4 = _slicedToArray(_useState3, 2),
-      password = _useState4[0],
-      setPassword = _useState4[1];
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-  var _useState5 = (0, _react.useState)(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      email = _useState6[0],
-      setEmail = _useState6[1];
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-  var _useState7 = (0, _react.useState)(""),
-      _useState8 = _slicedToArray(_useState7, 2),
-      birthday = _useState8[0],
-      setBirthday = _useState8[1];
+var ProfileView = /*#__PURE__*/function (_React$Component) {
+  _inherits(ProfileView, _React$Component);
 
-  function getUser() {
-    //e.preventDefault();
-    _axios.default.get('http://ach2.herokuapp.com/users/`${token}', {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
-    }).then(function (response) {
-      var data = response.data;
-      console.log(data);
-      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
-    }).catch(function (e) {
-      console.log('error registering the user');
-    });
+  var _super = _createSuper(ProfileView);
+
+  function ProfileView() {
+    var _this;
+
+    _classCallCheck(this, ProfileView);
+
+    _this = _super.call(this);
+    _this.state = {
+      user: null
+    };
+    return _this;
   }
 
-  return _react.default.createElement("div", {
-    className: "main-view"
-  }, _react.default.createElement("header", {
-    className: "big-blue-text"
-  }, _react.default.createElement("h1", null, "Profile")), _react.default.createElement(_Card.default, {
-    style: {
-      width: '30rem'
+  _createClass(ProfileView, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", null, _react.default.createElement("p", null, "Name: ", this.props.username));
     }
-  }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("h3", null, "Username:"), _react.default.createElement("h3", null, "Email:"), _react.default.createElement("h3", null, "Birthday:"))));
-}
+  }]);
 
-ProfileView.propTypes = {
-  user: _propTypes.default.arrayOf(_propTypes.default.shape({
-    _id: _propTypes.default.string,
-    Username: _propTypes.default.string,
-    Password: _propTypes.default.string,
-    Email: _propTypes.default.string,
-    Birthday: _propTypes.default.string
-  }))
+  return ProfileView;
+}(_react.default.Component);
+
+exports.ProfileView = ProfileView;
+user.propTypes = {
+  username: _propTypes.PropTypes.string
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/navbar-view/navbar-view":[function(require,module,exports) {
+var _default = ProfileView;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../main-view/main-view":"components/main-view/main-view.jsx"}],"components/navbar-view/navbar-view":[function(require,module,exports) {
 module.exports="/d7396fd9bef4a93558cf660f2122fc08.";
 },{}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
@@ -49229,7 +49237,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         // Assign the result to the state
         _this3.setState({
-          users: response.data
+          user: response.data
         });
       }).catch(function (error) {
         console.log(error);
@@ -49245,6 +49253,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           user: localStorage.getItem('user')
         });
         this.getMovies(accessToken);
+        this.getUsers(accessToken);
       }
     }
   }, {
@@ -49271,6 +49280,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
+      this.getUsers(authData.token);
     }
   }, {
     key: "onLoggedOut",
@@ -49418,13 +49428,12 @@ MainView.propTypes = {
     Featured: _propTypes.default.boolean,
     Actors: _propTypes.default.array
   })),
-  ProfileView: _propTypes.default.arrayOf(_propTypes.default.shape({
-    _id: _propTypes.default.string,
+  user: _propTypes.default.shape({
     Username: _propTypes.default.string,
     Password: _propTypes.default.string,
     Email: _propTypes.default.string,
     Birthday: _propTypes.default.string
-  }))
+  }).isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../login-view/logout-view":"components/login-view/logout-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../navbar-view/navbar-view":"components/navbar-view/navbar-view"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -49520,7 +49529,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49465" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58804" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

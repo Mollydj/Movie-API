@@ -53,14 +53,13 @@ export class MainView extends React.Component {
       .then(response => {
         // Assign the result to the state
         this.setState({
-          users: response.data
+          user: response.data
         });
       })
       .catch(function (error) {
         console.log(error);
       });
   }
-
 
   componentDidMount(token) {
     let accessToken = localStorage.getItem('token');
@@ -69,6 +68,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
+      this.getUsers(accessToken);
 
     }
   }
@@ -95,6 +95,7 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+    this.getUsers(authData.token);
   }
 
   onLoggedOut(authData) {
@@ -198,14 +199,14 @@ MainView.propTypes = {
       Actors: PropTypes.array
     })
   ),
-  ProfileView: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string,
-      Username: PropTypes.string,
-      Password: PropTypes.string,
-      Email: PropTypes.string,
-      Birthday: PropTypes.string,
 
-    })
-  ),
+  user: PropTypes.shape({
+    Username: PropTypes.string,
+    Password: PropTypes.string,
+    Email: PropTypes.string,
+    Birthday: PropTypes.string,
+
+  }).isRequired
 }
+
+

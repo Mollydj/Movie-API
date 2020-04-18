@@ -31,23 +31,26 @@ export function LoginView(props) {
     <div className="main-view">
       <header className="big-blue-text">MyFlix</header>
       <Form>
-        <Form.Label>
-          Username:
+        <Form.Group controlid="formBasicUsername">
+          <Form.Label> Username:</Form.Label>
           <Form.Control
             type="text"
+            placeholder="Username"
             value={username}
             onChange={e => setUsername(e.target.value)}
-          />
-        </Form.Label>
-        <br />
-        <Form.Label>
-          Password:
+            required />
+        </Form.Group>
+
+
+        <Form.Group controlid="formBasicPassword">
+          <Form.Label>Password:</Form.Label>
           <Form.Control
             type="password"
+            placeholder="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-          />
-        </Form.Label>
+            required />
+        </Form.Group>
         <br />
 
         <button type="button" className="btn btn-blue" onClick={handleSubmit}>

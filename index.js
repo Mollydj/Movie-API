@@ -17,12 +17,12 @@ const cors = require('cors');
 //mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect('mongodb+srv://mollydj:Iminnorush1@myflixdb-yyhj5.mongodb.net/myflixdb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
-
 //MIDDLEWARE
 app.use(cors());
 
 app.use(express.static("public"));
 app.use(morgan("common")); // Logging with Morgan
+app.use(express.json());
 app.use(bodyParser.json()); // Using bodyParser
 var auth = require('./auth')(app);
 
