@@ -195,14 +195,15 @@ MainView.propTypes = {
       Actors: PropTypes.array
     })
   ),
-
-  user: PropTypes.shape({
-    Username: PropTypes.string,
-    Password: PropTypes.string,
-    Email: PropTypes.string,
-    Birthday: PropTypes.string,
-
-  }).isRequired
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      username: PropTypes.string,
+      password: PropTypes.string,
+      email: PropTypes.string,
+      Birthday: PropTypes.string,
+    })
+  )
 }
 
 

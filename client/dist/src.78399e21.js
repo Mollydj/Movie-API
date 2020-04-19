@@ -49505,12 +49505,13 @@ MainView.propTypes = {
     Featured: _propTypes.default.boolean,
     Actors: _propTypes.default.array
   })),
-  user: _propTypes.default.shape({
-    Username: _propTypes.default.string,
-    Password: _propTypes.default.string,
-    Email: _propTypes.default.string,
+  users: _propTypes.default.arrayOf(_propTypes.default.shape({
+    _id: _propTypes.default.string,
+    username: _propTypes.default.string,
+    password: _propTypes.default.string,
+    email: _propTypes.default.string,
     Birthday: _propTypes.default.string
-  }).isRequired
+  }))
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../login-view/logout-view":"components/login-view/logout-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../navbar-view/navbar-view":"components/navbar-view/navbar-view"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
