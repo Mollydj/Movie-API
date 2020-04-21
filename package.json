@@ -46,7 +46,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
-    "npm-start-command": "^1.0.0"
+    "npm-start-command": "^1.0.0",
+    "sass": "^1.26.3"
   },
   "description": ""
 }

@@ -50,7 +50,7 @@ app.use((err, req, res, next) => {
 
 // GET //////////////////////////////////////////////
 //All movies to the user ok - 1
-app.get('/movies', passport.authenticate('jwt', { session: false }), function (req, res) {
+app.get('/movies', function (req, res) {
   Movies.find()
     .then(function (movies) {
       res.status(201).json(movies)
