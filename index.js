@@ -31,26 +31,23 @@ require('./passport');
 app.use(cors());
 
 // Allowing only certain origins to be given access
-let allowedOrigins = ['https://ach2.herokuapp.com', 'http://localhost:1234'];
+var allowedOrigins = ['http://localhost:1234',
+  'http://ach2.herokuapp.com'];
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin 
+    // (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+        'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        // if specific origin isn't found on list of allowed origins
-        var message =
-          'The CORS policy for this application doesn´t allow access from origin' +
-          origin;
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    },
-    next();
-  })
-);
-
-
+//cors
 //ERROR HANDLING
 
 app.use((err, req, res, next) => {
