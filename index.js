@@ -25,10 +25,9 @@ const passport = require('passport');
 require('./passport');
 
 
-const cors = require('cors');
+const cors = require('cors')
+var allowedOrigins = ['*'];
 
-
-var allowedOrigins = ['http://localhost:1234', '*'];
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
@@ -40,7 +39,7 @@ app.use(cors({
   }
 }));
 
-app.use(cors());
+
 //ERROR HANDLING
 
 app.use((err, req, res, next) => {
