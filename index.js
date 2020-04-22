@@ -25,10 +25,10 @@ const { check, validationResult } = require('express-validator');
 const passport = require('passport');
 require('./passport');
 
-const
 
-  // Specifies that app uses CORS - default: allows requests from all origins
-  app.use(cors());
+
+// Specifies that app uses CORS - default: allows requests from all origins
+app.use(cors());
 
 // Allowing only certain origins to be given access
 var allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
