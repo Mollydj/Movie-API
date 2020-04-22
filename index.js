@@ -31,8 +31,7 @@ require('./passport');
 app.use(cors());
 
 // Allowing only certain origins to be given access
-var allowedOrigins = ['http://localhost:1234',
-  'http://ach2.herokuapp.com'];
+var allowedOrigins = ['*'];
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin 
