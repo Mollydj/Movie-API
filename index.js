@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
+const cors = require('cors');
 
 // LOCAL mongoose.connect('mongodb://localhost:27017/myflixdb', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,9 +25,10 @@ const { check, validationResult } = require('express-validator');
 const passport = require('passport');
 require('./passport');
 
+const
 
-// Specifies that app uses CORS - default: allows requests from all origins
-app.use(cors());
+  // Specifies that app uses CORS - default: allows requests from all origins
+  app.use(cors());
 
 // Allowing only certain origins to be given access
 var allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
