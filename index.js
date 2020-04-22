@@ -38,8 +38,9 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));* /
+}));
 
+app.use(cors());
 //ERROR HANDLING
 
 app.use((err, req, res, next) => {
