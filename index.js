@@ -27,15 +27,18 @@ require('./passport');
 
 
 
-Access - Control - Allow - Origin: *
+// Specifies that app uses CORS - default: allows requests from all origins
+app.use(cors());
 
-  //cors
-  //ERROR HANDLING
 
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  });
+
+//cors
+//ERROR HANDLING
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 
 // GET //////////////////////////////////////////////
