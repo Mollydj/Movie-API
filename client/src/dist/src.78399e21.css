@@ -28,13 +28,9 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
-.button {
-  color: black;
-  background-color: var(--third-color);
-}
-
 .btn {
   color: #ffffff !important;
+  background-color: var(--third-color);
 }
 
 .btn:hover {

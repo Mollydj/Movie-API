@@ -3,43 +3,28 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import PropTypes from 'prop-types';
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-
+import { RegistrationView } from '../registration-view/registration-view';
+import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
 
 export class MainView extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      movies: null,
-      selectedMovie: null,
-      user: null //default is logged out
+      movies: [],
+      user: null
     };
   }
 
   // One of the "hooks" available in a React Component
-  componentDidMount() {
-    axios.get('http://ach2.herokuapp.com/movies')
-      .then(response => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-  }
-
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
-  }
 
 
   getMovies(token) {
@@ -54,8 +39,18 @@ export class MainView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+
   }
 
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);//after user logged in get movie data
+    }
+  }
 
   onLoggedIn(authData) {
     console.log(authData);
@@ -65,27 +60,77 @@ export class MainView extends React.Component {
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token); //will get the movies from the API once the user is logged in. 
+    this.getMovies(authData.token);
+  }
+
+  onLoggedOut(authData) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
   render() {
-    const { movies, selectedMovie, user } = this.state;
-
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
+    const { movies, user } = this.state;
     // Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
 
     return (
-      <div className="main-view">
-        {selectedMovie
-          ? <MovieView movie={selectedMovie} />
-          : movies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-          ))
-        }
-      </div>
+      <Router>
+        <div className="main-view">
+          <Route exact path="/" render={() => {
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            return movies.map(m => <MovieCard key={m._id} movie={m} />)
+          }
+          } />
+          <Route path="/register" render={() => <RegistrationView />} />
+
+          <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m} />)} />
+
+          <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+
+          <Route exact path="/genres/:name" render={({ match }) => {
+            if (!movies || movies.length === 0) return <div className="main-view" />;
+            return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} movies={movies} />
+          }
+          } />
+
+          <Route exact path="/directors/:name" render={({ match }) => {
+            if (!movies || movies.length === 0) return <div className="main-view" />;
+            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} movies={movies} />
+          }
+          } />
+
+
+
+
+        </div>
+      </Router>
 
     );
   }
 }
+
+MainView.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      Title: PropTypes.string,
+      ReleaseYear: PropTypes.string,
+      ImagePath: PropTypes.string,
+      Description: PropTypes.string,
+      Genre: PropTypes.shape({
+        Name: PropTypes.string,
+        Description: PropTypes.string
+      }),
+      Director: PropTypes.shape({
+        Name: PropTypes.string,
+        Bio: PropTypes.string,
+        Birth: PropTypes.string,
+        Death: PropTypes.string
+      }),
+      Featured: PropTypes.boolean,
+      Actors: PropTypes.array
+    })
+  ),
+
+};
+

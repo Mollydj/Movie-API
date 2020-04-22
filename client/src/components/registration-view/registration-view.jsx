@@ -3,26 +3,30 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import axios from 'axios';
+
 import { Link } from "react-router-dom";
 
-export function LoginView(props) {
+export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
-    axios.post('http://ach2.herokuapp.com/login', {
+    axios.post('https://ach2.herokuapp.com/users', {
       Username: username,
-      Password: password
+      Password: password,
+      Email: email,
+      Birthday: birthday
     })
       .then(response => {
         const data = response.data;
-        props.onLoggedIn(data);//data contains token + username
+        console.log(data);
+        window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
       })
       .catch(e => {
-        console.log('no such user')
+        console.log('error registering the user')
       });
-  };
+  }
 
   return (
 
@@ -36,10 +40,7 @@ export function LoginView(props) {
         Password:
       <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label><br />
-      <button type="button" onClick={handleSubmit} className="d-flex justify-content-center">Submit</button>
-      <Link to={`/register`}>
-        <Button type="buttton" variant="link">Sign Up</Button>
-      </Link>
+      <button type="button" onClick={handleRegister} className="d-flex justify-content-center">Submit</button>
     </form>
 
   );
