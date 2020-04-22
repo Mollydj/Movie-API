@@ -42,11 +42,30 @@ export class MainView extends React.Component {
   }
 
 
-  onLoggedIn(user) {
+  getMovies(token) {
+    axios.get('https://ach2.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
     });
-    //
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token); //will get the movies from the API once the user is logged in. 
   }
 
   render() {
