@@ -1,7 +1,24 @@
 import React from 'react';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+import { LoginView } from '../login-view/login-view';
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
+
 
 export class MainView extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      movies: null,
+      selectedMovie: null,
+      user: null //default is logged out
+    };
+  }
 
   // One of the "hooks" available in a React Component
   componentDidMount() {
@@ -15,23 +32,41 @@ export class MainView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+
+  }
+
+  onMovieClick(movie) {
+    this.setState({
+      selectedMovie: movie
+    });
   }
 
 
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+    //
+  }
+
   render() {
-    // If the state isn't initialized, this will throw on runtime
-    // before the data is initially loaded
-    const { movies } = this.state;
+    const { movies, selectedMovie, user } = this.state;
+
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     // Before the movies have been loaded
-    if (!movies) return <div className="main-view"/>;
+    if (!movies) return <div className="main-view" />;
 
     return (
-     <div className="main-view">
-     { movies.map(movie => (
-       <div className="movie-card" key={movie._id}>{movie.Title}</div>
-     ))}
-     </div>
+      <div className="main-view">
+        {selectedMovie
+          ? <MovieView movie={selectedMovie} />
+          : movies.map(movie => (
+            <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
+          ))
+        }
+      </div>
+
     );
   }
 }
