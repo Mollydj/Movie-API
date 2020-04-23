@@ -16,7 +16,7 @@ export class ProfileView extends React.Component {
     return (
       <Card style={{ width: '16rem' }}>
         <Card.Body>
-          <h2 className="fancy">{user.Username}</h2>
+          <h2 className="fancy"></h2>
 
 
 

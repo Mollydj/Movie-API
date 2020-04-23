@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar'
+import Button from 'react-bootstrap/Button';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -84,6 +83,7 @@ export class MainView extends React.Component {
   onLoggedOut(authData) {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+
   }
 
   render() {
@@ -96,8 +96,7 @@ export class MainView extends React.Component {
         <Navbar expand="lg" variant="light" bg="light">
           <Container>
             <Navbar.Brand href="/" className="fancy">Myflix</Navbar.Brand>
-            <Navbar.Brand href={`/users/${user}`} className="fancy">profile</Navbar.Brand>
-
+            <Navbar.Brand href={`/users/${user}`} className="fancy">{user}</Navbar.Brand>
           </Container>
         </Navbar>
 
@@ -125,7 +124,7 @@ export class MainView extends React.Component {
           }
           } />
 
-          <Route path="/users/:Username" render={() => <ProfileView />} />
+          <Route path={`/users/${user}`} render={() => <ProfileView />} />
 
 
         </div>
