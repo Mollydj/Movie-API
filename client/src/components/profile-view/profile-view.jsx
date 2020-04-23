@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -18,20 +19,23 @@ export class ProfileView extends React.Component {
     window.open('/', '_self');
   }
 
-  deregister(token) {
-    axios.delete('https://ach2.herokuapp.com/user', {
-      headers: { Authorization: `Bearer ${token}` }
+  deregister() {
+    axios.delete(`https://ach2.herokuapp.com/users/${localStorage.getItem('user')}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
       .then(response => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         this.setState({
-          movies: response.data
+          user: null
         });
+        console.log('user deleted')
       })
       .catch(function (error) {
         console.log(error);
       });
-
   }
+
 
   render() {
     const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
@@ -78,8 +82,8 @@ export class ProfileView extends React.Component {
             <Button variant="link">Back to Movies</Button>
           </Link>
 
-          <Link to={`/deleteUser`}>
-            <Button variant="danger">Delete Account</Button>
+          <Link to={`/`} >
+            <Button variant="danger" onClick={deregister}>Delete Account</Button>
           </Link>
 
           <Link to={`/updateUser`}>

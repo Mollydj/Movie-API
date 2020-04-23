@@ -49144,6 +49144,8 @@ exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
@@ -49202,17 +49204,22 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "deregister",
-    value: function deregister(token) {
+    value: function deregister() {
       var _this2 = this;
 
-      axios.delete('https://ach2.herokuapp.com/user', {
+      _axios.default.delete("https://ach2.herokuapp.com/users/".concat(localStorage.getItem('user')), {
         headers: {
-          Authorization: "Bearer ".concat(token)
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
       }).then(function (response) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+
         _this2.setState({
-          movies: response.data
+          user: null
         });
+
+        console.log('user deleted');
       }).catch(function (error) {
         console.log(error);
       });
@@ -49266,9 +49273,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_Button.default, {
         variant: "link"
       }, "Back to Movies")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/deleteUser"
+        to: "/"
       }, _react.default.createElement(_Button.default, {
-        variant: "danger"
+        variant: "danger",
+        onClick: deregister
       }, "Delete Account")), _react.default.createElement(_reactRouterDom.Link, {
         to: "/updateUser"
       }, _react.default.createElement(_Button.default, {
@@ -49282,7 +49290,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../main-view/main-view":"components/main-view/main-view.jsx"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../main-view/main-view":"components/main-view/main-view.jsx"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
