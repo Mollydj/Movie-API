@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types';
+import Navbar from 'react-bootstrap/Navbar'
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -13,6 +14,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 export class MainView extends React.Component {
   constructor() {
@@ -42,6 +44,20 @@ export class MainView extends React.Component {
 
   }
 
+  getUsers(token) {
+    axios.get('https://ach2.herokuapp.com/users', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          user: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
@@ -49,6 +65,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);//after user logged in get movie data
+      this.getUsers(accessToken);//after user logged in get movie data
     }
   }
 
@@ -61,6 +78,7 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+    this.getUsers(authData.token);
   }
 
   onLoggedOut(authData) {
@@ -75,6 +93,14 @@ export class MainView extends React.Component {
 
     return (
       <Router>
+        <Navbar expand="lg" variant="light" bg="light">
+          <Container>
+            <Navbar.Brand href="/" className="fancy">Myflix</Navbar.Brand>
+            <Navbar.Brand href={`/users/${user}`} className="fancy">profile</Navbar.Brand>
+
+          </Container>
+        </Navbar>
+
         <div className="main-view">
           <Route exact path="/" render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
@@ -99,7 +125,7 @@ export class MainView extends React.Component {
           }
           } />
 
-
+          <Route path="/users/:Username" render={() => <ProfileView />} />
 
 
         </div>

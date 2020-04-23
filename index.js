@@ -58,6 +58,17 @@ app.get('/users', passport.authenticate('jwt', { session: false }), function (re
     });
 });
 
+app.get('/users/:username', passport.authenticate('jwt', { session: false }), function (req, res) {
+  Users.find()
+    .then(function (user) {
+      res.status(201).json(user)
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
 
 
 //Return data of a movie by title to the user - 2
