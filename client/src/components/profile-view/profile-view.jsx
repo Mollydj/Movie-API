@@ -14,31 +14,79 @@ export class ProfileView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setState({
-      user: null
-    });
+
     window.open('/', '_self');
   }
 
+  deregister(token) {
+    axios.delete('https://ach2.herokuapp.com/user', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
 
   render() {
+    const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
 
 
     return (
-      <Card style={{ width: '16rem' }}>
+      <Card style={{ width: '30rem' }}>
         <Card.Body>
           <h2 className="fancy">Profile</h2>
 
+          <div className="pretty">
+            Username:            {this.props.profile.Username}<br />
+            Password:           <br />
+            Email:            {this.props.profile.Email}<br />
+            Birthday:            {this.props.profile.Birthday}<br />
+            <h3 className="fancy">Favorite Movies</h3>
+            <ul className="ml- pl-0 card-body d-flex flex-row align justify-content-center">
+              {userMovies.map(movie =>
+                (
+                  <li key={movie._id} className="mb-2 ">
+                    <Card style={{ width: '10rem' }}>
+                      <Card.Img variant="top" src={movie.ImagePath} />
+                      <Card.Body>
+                        <Card.Title className="fancy">{movie.Title}</Card.Title>
+
+                        <Link to={`/movies/${movie._id}`}>
+                          <Button variant="link" className="fancy">delete</Button>
+                        </Link>
+
+
+                      </Card.Body>
+                    </Card>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
 
           <Link to={`/logout`}>
-            <Button variant="link" onClick={this.onLoggedOut}>logout</Button>
+            <Button variant="link" onClick={this.onLoggedOut}>Logout</Button>
           </Link>
 
           <Link to={`/`}>
             <Button variant="link">Back to Movies</Button>
           </Link>
+
+          <Link to={`/deleteUser`}>
+            <Button variant="danger">Delete Account</Button>
+          </Link>
+
+          <Link to={`/updateUser`}>
+            <Button variant="link" className="pull-right">Edit Profile</Button>
+          </Link>
         </Card.Body>
-      </Card>
+      </Card >
     )
   }
 }

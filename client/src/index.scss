@@ -15,7 +15,7 @@
 }
 
 .pretty {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Signika', sans-serif;
 }
 
 .card {
@@ -26,13 +26,18 @@
 
 body{
   background-color: var(--primary-color);
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Signika', sans-serif;
+}
+
+ul{
+ list-style:none;
 }
 
 
 .btn {
   color:#ffffff !important;
   background-color: var(--third-color);
+  margin:10px;
 }
 .btn:hover {
   color:#ffffff !important;

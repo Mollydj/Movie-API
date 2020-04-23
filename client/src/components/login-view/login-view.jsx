@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
+import { Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
@@ -36,7 +36,7 @@ export function LoginView(props) {
         Password:
       <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label><br />
-      <button type="button" onClick={handleSubmit} className="d-flex justify-content-center">Submit</button>
+      <Button type="Button" onClick={handleSubmit} className="d-flex justify-content-center">Submit</Button>
       <Link to={`/register`}>
         <Button variant="link">Sign Up</Button>
       </Link>

@@ -1,12 +1,11 @@
 import React from 'react';
 
 import axios from 'axios';
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 import PropTypes from 'prop-types';
-import Navbar from 'react-bootstrap/Navbar'
-import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
 
-import { Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { LoginView } from '../login-view/login-view';
@@ -109,7 +108,7 @@ export class MainView extends React.Component {
 
         <div className="main-view">
           <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            if (!user || user.length === 0) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return movies.map(m => <MovieCard key={m._id} movie={m} />)
           }
           } />
@@ -132,13 +131,14 @@ export class MainView extends React.Component {
           } />
 
 
-          <Route path="/users/:Username" render={() =>
-            <ProfileView />
+          <Route exact path="/users/:Username" render={({ match }) => {
+            if (!profile || profile.length === 0) return <div className="main-view" />;
+            return <ProfileView profile={profile} user={user} movies={movies} />
+          }
           } />
 
-
           <Route path="/logout" render={() =>
-            <LogoutView />
+            <LoginView />
           } />
 
         </div>
