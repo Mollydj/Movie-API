@@ -6,17 +6,24 @@ import { Link } from "react-router-dom";
 import { MainView } from '../main-view/main-view';
 export class ProfileView extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.state = {};
   }
 
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+    window.open('/', '_self');
   }
 
 
   render() {
+
+
     return (
       <Card style={{ width: '16rem' }}>
         <Card.Body>

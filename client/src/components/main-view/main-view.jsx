@@ -48,7 +48,7 @@ export class MainView extends React.Component {
   }
 
   getUsers(token) {
-    axios.get(`https://ach2.herokuapp.com/users/`, {
+    axios.get(`https://ach2.herokuapp.com/users/${localStorage.getItem('user')}`, {
 
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -89,7 +89,11 @@ export class MainView extends React.Component {
   render() {
     const { movies, user, profile, onLoggedOut } = this.state;
     // Before the movies have been loaded
-    console.log(profile)
+    console.log(profile.Username)
+    console.log(profile.Email)
+    console.log(profile.Birthday)
+
+
 
     return (
       <Router>
@@ -127,11 +131,9 @@ export class MainView extends React.Component {
           }
           } />
 
-          <Route exact path="/users/:Username" render={({ match }) => {
-            if (!profile || profile.length === 0)
-              return <div className="main-view" />;
-            return <ProfileView username={profile.find(u => u.Username === match.params.Username)} profile={profile} />
-          }
+
+          <Route path="/users/:Username" render={() =>
+            <ProfileView />
           } />
 
           <Route path="/logout" render={() =>

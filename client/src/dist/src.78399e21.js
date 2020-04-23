@@ -38329,10 +38329,14 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(ProfileView);
 
-  function ProfileView(props) {
+  function ProfileView() {
+    var _this;
+
     _classCallCheck(this, ProfileView);
 
-    return _super.call(this, props);
+    _this = _super.call(this);
+    _this.state = {};
+    return _this;
   }
 
   _createClass(ProfileView, [{
@@ -38340,6 +38344,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function onLoggedOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      this.setState({
+        user: null
+      });
+      window.open('/', '_self');
     }
   }, {
     key: "render",
@@ -38471,7 +38479,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getUsers(token) {
       var _this3 = this;
 
-      _axios.default.get("https://ach2.herokuapp.com/users/", {
+      _axios.default.get("https://ach2.herokuapp.com/users/".concat(localStorage.getItem('user')), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -38520,7 +38528,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           profile = _this$state.profile,
           onLoggedOut = _this$state.onLoggedOut; // Before the movies have been loaded
 
-      console.log(profile);
+      console.log(profile.Username);
+      console.log(profile.Email);
+      console.log(profile.Birthday);
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Navbar.default, {
         expand: "lg",
         variant: "light",
@@ -38606,19 +38616,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
         path: "/users/:Username",
-        render: function render(_ref4) {
-          var match = _ref4.match;
-          if (!profile || profile.length === 0) return _react.default.createElement("div", {
-            className: "main-view"
-          });
-          return _react.default.createElement(_profileView.ProfileView, {
-            username: profile.find(function (u) {
-              return u.Username === match.params.Username;
-            }),
-            profile: profile
-          });
+        render: function render() {
+          return _react.default.createElement(_profileView.ProfileView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/logout",
