@@ -38350,9 +38350,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("h2", {
         className: "fancy"
-      }, "Profile"), profile.map(function (user) {
-        return _react.default.createElement("div", null, user.Username);
-      }), _react.default.createElement(_reactRouterDom.Link, {
+      }, "Profile"), _react.default.createElement(_reactRouterDom.Link, {
         to: "/logout"
       }, _react.default.createElement(_Button.default, {
         variant: "link",
@@ -38473,7 +38471,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getUsers(token) {
       var _this3 = this;
 
-      _axios.default.get('https://ach2.herokuapp.com/users/', {
+      _axios.default.get("https://ach2.herokuapp.com/users/", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -38522,15 +38520,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           profile = _this$state.profile,
           onLoggedOut = _this$state.onLoggedOut; // Before the movies have been loaded
 
-      /*
-            <div className="col">
-              <h1>Mi Casa</h1>
-              <p>This is my house y&apos;all!</p>
-              {homes.map(home => <div>{home.name}</div>)}
-            </div>
-          );
-      */
-
+      console.log(profile);
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Navbar.default, {
         expand: "lg",
         variant: "light",
@@ -38541,9 +38531,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, "Myflix"), _react.default.createElement(_reactRouterDom.Link, {
         className: "fancy",
         to: "/users/".concat(user)
-      }, " ", user, " "))), profile.map(function (user) {
-        return _react.default.createElement("div", null, user.Username);
-      }), _react.default.createElement("div", {
+      }, " ", user, " "))), _react.default.createElement("div", {
         className: "main-view"
       }, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,

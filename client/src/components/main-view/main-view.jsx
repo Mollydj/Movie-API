@@ -48,7 +48,7 @@ export class MainView extends React.Component {
   }
 
   getUsers(token) {
-    axios.get('https://ach2.herokuapp.com/users/', {
+    axios.get(`https://ach2.herokuapp.com/users/`, {
 
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -86,20 +86,11 @@ export class MainView extends React.Component {
     this.getUsers(authData.token);
   }
 
-
-
   render() {
     const { movies, user, profile, onLoggedOut } = this.state;
     // Before the movies have been loaded
+    console.log(profile)
 
-    /*
-          <div className="col">
-            <h1>Mi Casa</h1>
-            <p>This is my house y&apos;all!</p>
-            {homes.map(home => <div>{home.name}</div>)}
-          </div>
-        );
-    */
     return (
       <Router>
         <Navbar expand="lg" variant="light" bg="light">
@@ -109,7 +100,7 @@ export class MainView extends React.Component {
           </Container>
 
         </Navbar>
-        {profile.map(user => <div>{user.Username}</div>)}
+
 
 
         <div className="main-view">
@@ -178,4 +169,3 @@ MainView.propTypes = {
   ),
 
 };
-

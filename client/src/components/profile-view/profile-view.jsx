@@ -15,13 +15,14 @@ export class ProfileView extends React.Component {
     localStorage.removeItem('user');
   }
 
+
   render() {
     return (
       <Card style={{ width: '16rem' }}>
         <Card.Body>
           <h2 className="fancy">Profile</h2>
 
-          {profile.map(user => <div>{user.Username}</div>)}
+
           <Link to={`/logout`}>
             <Button variant="link" onClick={this.onLoggedOut}>logout</Button>
           </Link>
