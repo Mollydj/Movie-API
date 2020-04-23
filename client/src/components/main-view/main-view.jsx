@@ -1,13 +1,16 @@
 import React from 'react';
+
 import axios from 'axios';
 import Container from 'react-bootstrap/Container'
 import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button';
 
+import { Redirect } from "react-router-dom"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { LoginView } from '../login-view/login-view';
+import { LogoutView } from '../logout-view/logout-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -21,7 +24,8 @@ export class MainView extends React.Component {
 
     this.state = {
       movies: [],
-      user: null
+      profile: [],
+      user: []
     };
   }
 
@@ -44,12 +48,14 @@ export class MainView extends React.Component {
   }
 
   getUsers(token) {
-    axios.get('https://ach2.herokuapp.com/users', {
+    axios.get('https://ach2.herokuapp.com/users/', {
+
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         this.setState({
-          user: response.data
+          profile: response.data
+
         });
       })
       .catch(function (error) {
@@ -64,7 +70,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);//after user logged in get movie data
-      this.getUsers(accessToken);//after user logged in get movie data
+      this.getUsers(accessToken);
     }
   }
 
@@ -80,25 +86,31 @@ export class MainView extends React.Component {
     this.getUsers(authData.token);
   }
 
-  onLoggedOut(authData) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
 
-  }
 
   render() {
-    const { movies, user } = this.state;
+    const { movies, user, profile, onLoggedOut } = this.state;
     // Before the movies have been loaded
-    if (!movies) return <div className="main-view" />;
 
+    /*
+          <div className="col">
+            <h1>Mi Casa</h1>
+            <p>This is my house y&apos;all!</p>
+            {homes.map(home => <div>{home.name}</div>)}
+          </div>
+        );
+    */
     return (
       <Router>
         <Navbar expand="lg" variant="light" bg="light">
           <Container>
             <Navbar.Brand href="/" className="fancy">Myflix</Navbar.Brand>
-            <Navbar.Brand href={`/users/${user}`} className="fancy">{user}</Navbar.Brand>
+            <Link className="fancy" to={`/users/${user}`}> {user} </Link>
           </Container>
+
         </Navbar>
+        {profile.map(user => <div>{user.Username}</div>)}
+
 
         <div className="main-view">
           <Route exact path="/" render={() => {
@@ -124,8 +136,16 @@ export class MainView extends React.Component {
           }
           } />
 
-          <Route path={`/users/${user}`} render={() => <ProfileView />} />
+          <Route exact path="/users/:Username" render={({ match }) => {
+            if (!profile || profile.length === 0)
+              return <div className="main-view" />;
+            return <ProfileView username={profile.find(u => u.Username === match.params.Username)} profile={profile} />
+          }
+          } />
 
+          <Route path="/logout" render={() =>
+            <LogoutView />
+          } />
 
         </div>
       </Router>

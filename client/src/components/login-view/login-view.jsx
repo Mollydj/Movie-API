@@ -38,7 +38,7 @@ export function LoginView(props) {
       </label><br />
       <button type="button" onClick={handleSubmit} className="d-flex justify-content-center">Submit</button>
       <Link to={`/register`}>
-        <Button type="buttton" variant="link">Sign Up</Button>
+        <Button variant="link">Sign Up</Button>
       </Link>
     </form>
 
