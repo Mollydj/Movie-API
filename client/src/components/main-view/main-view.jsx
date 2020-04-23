@@ -136,6 +136,7 @@ export class MainView extends React.Component {
             <ProfileView />
           } />
 
+
           <Route path="/logout" render={() =>
             <LogoutView />
           } />
