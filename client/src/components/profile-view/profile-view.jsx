@@ -48,7 +48,6 @@ export class ProfileView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-
   }
 
   render() {
@@ -74,7 +73,7 @@ export class ProfileView extends React.Component {
                         <Card.Title className="fancy">{movie.Title}</Card.Title>
 
 
-                        <Button onClick={this.deleteMovie} className="fancy">delete</Button>
+                        <Button className="fancy" onClick={e => this.deleteMovie(movie._id)}>delete</Button>
 
 
 

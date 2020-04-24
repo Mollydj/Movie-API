@@ -130,7 +130,6 @@ export class MainView extends React.Component {
           }
           } />
 
-
           <Route exact path="/users/:Username" render={({ match }) => {
             if (!profile || profile.length === 0) return <div className="main-view" />;
             return <ProfileView profile={profile} user={user} movies={movies} />

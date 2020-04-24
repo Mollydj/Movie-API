@@ -48678,6 +48678,8 @@ exports.MovieCard = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
@@ -48722,8 +48724,24 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MovieCard, [{
+    key: "addFavorite",
+    value: function addFavorite(MovieId) {
+      _axios.default.post("https://ach2.herokuapp.com/users/".concat(localStorage.getItem('user'), "/Movies/").concat(MovieId), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        document.location.reload(true);
+        console.log('movie favorited');
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var movie = this.props.movie;
       return _react.default.createElement(_Card.default, {
         style: {
@@ -48739,7 +48757,12 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_Button.default, {
         variant: "link",
         className: "fancy"
-      }, "Open"))));
+      }, "Open")), _react.default.createElement(_Button.default, {
+        className: "fancy",
+        onClick: function onClick(e) {
+          return _this.addFavorite(movie._id);
+        }
+      }, "Favorite")));
     }
   }]);
 
@@ -48768,7 +48791,7 @@ MovieCard.propTypes = {
     Actors: _propTypes.default.array
   }))
 };
-},{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49272,8 +49295,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
           className: "fancy"
         }, movie.Title), _react.default.createElement(_Button.default, {
-          onClick: _this3.deleteMovie,
-          className: "fancy"
+          className: "fancy",
+          onClick: function onClick(e) {
+            return _this3.deleteMovie(movie._id);
+          }
         }, "delete"))));
       }))), _react.default.createElement(_reactRouterDom.Link, {
         to: "/logout"
