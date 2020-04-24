@@ -34,19 +34,19 @@ export function RegistrationView(props) {
         <h1 className="fancy">My Flix</h1><br />
         <label>
           Username:
-      <input type="text" value={username} placeholder="Username" onChange={e => setUsername(e.target.value)} />
+        <input type="text" value={username} placeholder="Username" onChange={e => setUsername(e.target.value)} />
         </label>
         <label>
           Password:
-      <input type="password" value={password} placeholder="Password" onChange={e => setPassword(e.target.value)} />
+        <input type="password" value={password} placeholder="Password" onChange={e => setPassword(e.target.value)} />
         </label><br />
         <label>
           Email:
-      <input type="Email" value={email} placeholder="JohnSmith@email.com" onChange={e => setEmail(e.target.value)} />
+        <input type="Email" value={email} placeholder="JohnSmith@email.com" onChange={e => setEmail(e.target.value)} />
         </label><br />
         <label>
           Birthday:
-      <input value={birthday} placeholder="MM/DD/YYYY" onChange={e => setBirthday(e.target.value)} />
+        <input value={birthday} placeholder="MM/DD/YYYY" onChange={e => setBirthday(e.target.value)} />
         </label><br />
         <Button type="button" onClick={updateUser} className="d-flex justify-content-center">Submit</Button>
       </form>

@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
-import { MainView } from '../main-view/main-view';
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 
 export class ProfileView extends React.Component {
 
@@ -19,7 +18,6 @@ export class ProfileView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-
     window.open('/', '_self');
   }
 
@@ -45,7 +43,6 @@ export class ProfileView extends React.Component {
   deleteMovie(MovieId) {
     axios.delete(`https://ach2.herokuapp.com/users/${localStorage.getItem('user')}/Movies/${MovieId}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-
     })
       .then(response => {
         document.location.reload(true);
@@ -67,19 +64,15 @@ export class ProfileView extends React.Component {
           <Button variant="link" className="float-right">Edit Profile</Button>
         </Link>
         <Row>
-
           <Col>
             <h2 className="fancy">Profile</h2>
-
             <div className="pretty">
-
               Username:            {this.props.profile.Username}<br />
             Password:           <br />
             Email:            {this.props.profile.Email}<br />
             Birthday:            {this.props.profile.Birthday}<br /><br />
-
               <h3 className="fancy">Favorite Movies</h3>
-              <ul className="ml- pl-0 card-body">
+              <ul className="ml- pl-0 card-body d-flex flex-row align justify-content-center">
                 {userMovies.map(movie =>
                   (
                     <li key={movie._id} className="mb-2 ">
@@ -88,12 +81,8 @@ export class ProfileView extends React.Component {
                         <Card.Body>
                           <Card.Title className="fancy">{movie.Title}</Card.Title>
                           <Button className="fancy" onClick={e => this.deleteMovie(movie._id)}>delete</Button>
-
-
-
                         </Card.Body>
                       </Card>
-
                     </li>
                   ))}
               </ul>

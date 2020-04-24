@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export function UpdateUser(props) {
   const { profile, user } = props;
@@ -46,19 +46,19 @@ export function UpdateUser(props) {
               <h1 className="fancy">Update Profile</h1><br />
               <label>
                 Username:
-      <input type="text" value={username} placeholder={profile.Username} onChange={e => updateUsername(e.target.value)} />
+        <input type="text" value={username} placeholder={profile.Username} onChange={e => updateUsername(e.target.value)} />
               </label><br />
               <label>
                 Password:
-      <input type="password" value={password} placeholder="Password" onChange={e => updatePassword(e.target.value)} />
+        <input type="password" value={password} placeholder="Password" onChange={e => updatePassword(e.target.value)} />
               </label><br />
               <label>
                 Email:
-      <input type="Email" value={email} placeholder={profile.Email} onChange={e => updateEmail(e.target.value)} />
+        <input type="Email" value={email} placeholder={profile.Email} onChange={e => updateEmail(e.target.value)} />
               </label><br />
               <label>
                 Birthday:
-      <input value={birthday} placeholder="MM/DD/YYYY" onChange={e => updateBirthday(e.target.value)} />
+        <input value={birthday} placeholder="MM/DD/YYYY" onChange={e => updateBirthday(e.target.value)} />
               </label><br />
               <Button className="d-flex flex-row align justify-content-center" type="button" onClick={updateUser}>Submit</Button>
             </form>
