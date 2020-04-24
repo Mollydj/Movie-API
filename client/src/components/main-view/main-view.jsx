@@ -141,9 +141,10 @@ export class MainView extends React.Component {
             <LoginView />
           } />
 
-          <Route path="/update/:Username" render={() =>
-            <UpdateUser profile={profile} user={user} movies={movies} />
-          } />
+          <Route exact path="/update/:Username" render={() => <UpdateUser profile={profile} user={user} />} />
+
+
+
         </div>
       </Router>
 

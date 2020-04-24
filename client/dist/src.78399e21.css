@@ -14,6 +14,11 @@
   font-family: "Signika", sans-serif;
 }
 
+.Navstyle {
+  font-family: "Signika", sans-serif;
+  background-color: var(--third-color);
+}
+
 .card {
   margin: 0 auto;
   /* Added */
@@ -36,6 +41,7 @@ ul {
   color: #ffffff !important;
   background-color: var(--third-color);
   margin: 10px;
+  border: 0px;
 }
 
 .btn:hover {

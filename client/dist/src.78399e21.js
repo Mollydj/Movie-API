@@ -48947,7 +48947,7 @@ function RegistrationView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var handleRegister = function handleRegister(e) {
+  var updateUser = function updateUser(e) {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
 
     _axios.default.post('https://ach2.herokuapp.com/users', {
@@ -48997,7 +48997,7 @@ function RegistrationView(props) {
     }
   })), _react.default.createElement("br", null), _react.default.createElement(_Button.default, {
     type: "button",
-    onClick: handleRegister,
+    onClick: updateUser,
     className: "d-flex justify-content-center"
   }, "Submit")));
 }
@@ -49179,6 +49179,12 @@ var _reactRouterDom = require("react-router-dom");
 
 var _mainView = require("../main-view/main-view");
 
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -49267,21 +49273,26 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
+      var user = this.props.profile.Username;
       var userMovies = this.props.movies.filter(function (g) {
         return _this3.props.profile.FavoriteMovies.includes(g._id);
       });
-      return _react.default.createElement(_Card.default, {
-        style: {
-          width: '30rem'
-        }
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("h2", {
+      console.log(user);
+      return _react.default.createElement(_Container.default, {
+        className: "bg-light"
+      }, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/update/".concat(user)
+      }, _react.default.createElement(_Button.default, {
+        variant: "link",
+        className: "float-right"
+      }, "Edit Profile")), _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("h2", {
         className: "fancy"
       }, "Profile"), _react.default.createElement("div", {
         className: "pretty"
-      }, "Username:            ", this.props.profile.Username, _react.default.createElement("br", null), "Password:           ", _react.default.createElement("br", null), "Email:            ", this.props.profile.Email, _react.default.createElement("br", null), "Birthday:            ", this.props.profile.Birthday, _react.default.createElement("br", null), _react.default.createElement("h3", {
+      }, "Username:            ", this.props.profile.Username, _react.default.createElement("br", null), "Password:           ", _react.default.createElement("br", null), "Email:            ", this.props.profile.Email, _react.default.createElement("br", null), "Birthday:            ", this.props.profile.Birthday, _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("h3", {
         className: "fancy"
       }, "Favorite Movies"), _react.default.createElement("ul", {
-        className: "ml- pl-0 card-body d-flex flex-row align justify-content-center"
+        className: "ml- pl-0 card-body"
       }, userMovies.map(function (movie) {
         return _react.default.createElement("li", {
           key: movie._id,
@@ -49289,7 +49300,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }, _react.default.createElement(_Card.default, {
           style: {
             width: '10rem'
-          }
+          },
+          md: 4
         }, _react.default.createElement(_Card.default.Img, {
           variant: "top",
           src: movie.ImagePath
@@ -49315,12 +49327,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_Button.default, {
         variant: "danger",
         onClick: this.deregister
-      }, "Delete Account")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/updateUser"
-      }, _react.default.createElement(_Button.default, {
-        variant: "link",
-        className: "pull-right"
-      }, "Edit Profile"))));
+      }, "Delete Account")))));
     }
   }]);
 
@@ -49328,7 +49335,130 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../main-view/main-view":"components/main-view/main-view.jsx"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../main-view/main-view":"components/main-view/main-view.jsx","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js"}],"components/update-view/update-profile.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UpdateUser = UpdateUser;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function UpdateUser(props) {
+  var profile = props.profile,
+      user = props.user;
+
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      updateUsername = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      updatePassword = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      email = _useState6[0],
+      updateEmail = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      birthday = _useState8[0],
+      updateBirthday = _useState8[1];
+
+  var updateUser = function updateUser(e) {
+    e.preventDefault();
+
+    _axios.default.put("https://ach2.herokuapp.com/users/".concat(user), {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    }, {
+      headers: {
+        Authorization: "Bearer ".concat(localStorage.getItem('token'))
+      }
+    }).then(function (response) {
+      var data = response.data;
+      localStorage.setItem('user', data.Username);
+      window.open("/users/".concat(localStorage.getItem('user')), '_self');
+      console.log('user updated');
+    }).catch(function (error) {
+      console.log(error);
+    });
+  };
+
+  return _react.default.createElement("div", {
+    className: "register-view "
+  }, _react.default.createElement(_Container.default, {
+    className: "bg-light d-flex flex-row align justify-content-center"
+  }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("form", null, _react.default.createElement("h1", {
+    className: "fancy"
+  }, "Update Profile"), _react.default.createElement("br", null), _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
+    type: "text",
+    value: username,
+    placeholder: profile.Username,
+    onChange: function onChange(e) {
+      return updateUsername(e.target.value);
+    }
+  })), _react.default.createElement("br", null), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
+    type: "password",
+    value: password,
+    placeholder: "Password",
+    onChange: function onChange(e) {
+      return updatePassword(e.target.value);
+    }
+  })), _react.default.createElement("br", null), _react.default.createElement("label", null, "Email:", _react.default.createElement("input", {
+    type: "Email",
+    value: email,
+    placeholder: profile.Email,
+    onChange: function onChange(e) {
+      return updateEmail(e.target.value);
+    }
+  })), _react.default.createElement("br", null), _react.default.createElement("label", null, "Birthday:", _react.default.createElement("input", {
+    value: birthday,
+    placeholder: "MM/DD/YYYY",
+    onChange: function onChange(e) {
+      return updateBirthday(e.target.value);
+    }
+  })), _react.default.createElement("br", null), _react.default.createElement(_Button.default, {
+    className: "d-flex flex-row align justify-content-center",
+    type: "button",
+    onClick: updateUser
+  }, "Submit"))))));
+}
+},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49363,6 +49493,8 @@ var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
 
 var _profileView = require("../profile-view/profile-view");
+
+var _updateProfile = require("../update-view/update-profile");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49485,7 +49617,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Navbar.default, {
         expand: "lg",
         variant: "light",
-        bg: "light"
+        className: "Navstyle"
       }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default.Brand, {
         href: "/",
         className: "fancy"
@@ -49585,6 +49717,15 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render() {
           return _react.default.createElement(_loginView.LoginView, null);
         }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/update/:Username",
+        render: function render() {
+          return _react.default.createElement(_updateProfile.UpdateUser, {
+            profile: profile,
+            user: user
+          });
+        }
       })));
     }
   }]);
@@ -49614,7 +49755,7 @@ MainView.propTypes = {
     Actors: _propTypes.default.array
   }))
 };
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Navbar":"../../node_modules/react-bootstrap/esm/Navbar.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../login-view/login-view":"components/login-view/login-view.jsx","../logout-view/logout-view":"components/logout-view/logout-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Navbar":"../../node_modules/react-bootstrap/esm/Navbar.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../login-view/login-view":"components/login-view/login-view.jsx","../logout-view/logout-view":"components/logout-view/logout-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../update-view/update-profile":"components/update-view/update-profile.jsx"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -49775,7 +49916,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53394" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

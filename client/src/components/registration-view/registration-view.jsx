@@ -10,7 +10,7 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const handleRegister = (e) => {
+  const updateUser = (e) => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
     axios.post('https://ach2.herokuapp.com/users', {
       Username: username,
@@ -48,7 +48,7 @@ export function RegistrationView(props) {
           Birthday:
       <input value={birthday} placeholder="MM/DD/YYYY" onChange={e => setBirthday(e.target.value)} />
         </label><br />
-        <Button type="button" onClick={handleRegister} className="d-flex justify-content-center">Submit</Button>
+        <Button type="button" onClick={updateUser} className="d-flex justify-content-center">Submit</Button>
       </form>
     </div>
   );

@@ -57,7 +57,10 @@ export class ProfileView extends React.Component {
   }
 
   render() {
+    const user = this.props.profile.Username
     const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
+
+    console.log(user)
     return (
       <Container className="bg-light">
         <Link to={`/update/${user}`}>
@@ -76,7 +79,7 @@ export class ProfileView extends React.Component {
             Birthday:            {this.props.profile.Birthday}<br /><br />
 
               <h3 className="fancy">Favorite Movies</h3>
-              <ul className="ml- pl-0 card-body d-flex flex-row align justify-content-center">
+              <ul className="ml- pl-0 card-body">
                 {userMovies.map(movie =>
                   (
                     <li key={movie._id} className="mb-2 ">
