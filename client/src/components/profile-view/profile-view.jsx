@@ -5,6 +5,10 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import { MainView } from '../main-view/main-view';
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+
 export class ProfileView extends React.Component {
 
   constructor() {
@@ -55,55 +59,60 @@ export class ProfileView extends React.Component {
   render() {
     const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
     return (
-      <Card style={{ width: '30rem' }}>
-        <Card.Body>
-          <h2 className="fancy">Profile</h2>
+      <Container className="bg-light">
+        <Link to={`/updateprofile`}>
+          <Button variant="link" className="float-right">Edit Profile</Button>
+        </Link>
+        <Row>
 
-          <div className="pretty">
-            Username:            {this.props.profile.Username}<br />
+          <Col>
+            <h2 className="fancy">Profile</h2>
+
+            <div className="pretty">
+
+              Username:            {this.props.profile.Username}<br />
             Password:           <br />
             Email:            {this.props.profile.Email}<br />
-            Birthday:            {this.props.profile.Birthday}<br />
-            <h3 className="fancy">Favorite Movies</h3>
-            <ul className="ml- pl-0 card-body d-flex flex-row align justify-content-center">
-              {userMovies.map(movie =>
-                (
-                  <li key={movie._id} className="mb-2 ">
-                    <Card style={{ width: '10rem' }}>
-                      <Card.Img variant="top" src={movie.ImagePath} />
-                      <Card.Body>
-                        <Card.Title className="fancy">{movie.Title}</Card.Title>
+            Birthday:            {this.props.profile.Birthday}<br /><br />
+
+              <h3 className="fancy">Favorite Movies</h3>
+              <ul className="ml- pl-0 card-body d-flex flex-row align justify-content-center">
+                {userMovies.map(movie =>
+                  (
+                    <li key={movie._id} className="mb-2 ">
+                      <Card style={{ width: '10rem' }} md={4}>
+                        <Card.Img variant="top" src={movie.ImagePath} />
+                        <Card.Body>
+                          <Card.Title className="fancy">{movie.Title}</Card.Title>
+                          <Button className="fancy" onClick={e => this.deleteMovie(movie._id)}>delete</Button>
 
 
-                        <Button className="fancy" onClick={e => this.deleteMovie(movie._id)}>delete</Button>
+
+                        </Card.Body>
+                      </Card>
+
+                    </li>
+                  ))}
+              </ul>
+            </div>
 
 
+            <Link to={`/logout`}>
+              <Button variant="link" onClick={this.onLoggedOut}>Logout</Button>
+            </Link>
 
-                      </Card.Body>
-                    </Card>
-                  </li>
-                ))}
-            </ul>
-          </div>
+            <Link to={`/`}>
+              <Button variant="link">Back to Movies</Button>
+            </Link>
+
+            <Link to={`/`} >
+              <Button variant="danger" onClick={this.deregister}>Delete Account</Button>
+            </Link>
 
 
-          <Link to={`/logout`}>
-            <Button variant="link" onClick={this.onLoggedOut}>Logout</Button>
-          </Link>
-
-          <Link to={`/`}>
-            <Button variant="link">Back to Movies</Button>
-          </Link>
-
-          <Link to={`/`} >
-            <Button variant="danger" onClick={this.deregister}>Delete Account</Button>
-          </Link>
-
-          <Link to={`/updateUser`}>
-            <Button variant="link" className="pull-right">Edit Profile</Button>
-          </Link>
-        </Card.Body>
-      </Card >
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

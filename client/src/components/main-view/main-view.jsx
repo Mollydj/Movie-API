@@ -16,6 +16,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { UpdateUser } from '../update-view/update-profile';
 
 export class MainView extends React.Component {
   constructor() {
@@ -96,7 +97,7 @@ export class MainView extends React.Component {
 
     return (
       <Router>
-        <Navbar expand="lg" variant="light" bg="light">
+        <Navbar expand="lg" variant="light" className="Navstyle">
           <Container>
             <Navbar.Brand href="/" className="fancy">Myflix</Navbar.Brand>
             <Link className="fancy" to={`/users/${user}`}> {user} </Link>
@@ -140,6 +141,9 @@ export class MainView extends React.Component {
             <LoginView />
           } />
 
+          <Route path="/update/:Username" render={() =>
+            <UpdateUser profile={profile} user={user} movies={movies} />
+          } />
         </div>
       </Router>
 
