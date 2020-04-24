@@ -60,7 +60,7 @@ export class ProfileView extends React.Component {
     const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
     return (
       <Container className="bg-light">
-        <Link to={`/updateprofile`}>
+        <Link to={`/update/${user}`}>
           <Button variant="link" className="float-right">Edit Profile</Button>
         </Link>
         <Row>
