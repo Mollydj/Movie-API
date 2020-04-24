@@ -48735,7 +48735,7 @@ var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 
-var _reactBootstrap = require("react-bootstrap");
+var _Image = _interopRequireDefault(require("react-bootstrap/Image"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48781,38 +48781,39 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var movie = this.props.movie;
       if (!movie) return null;
-      return _react.default.createElement("div", {
-        className: "movie-view"
-      }, _react.default.createElement(_Container.default, {
-        className: "bg-light flex align justify-content-center"
-      }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("img", {
-        className: "movie-poster",
-        src: movie.ImagePath
-      }), _react.default.createElement("div", {
+      return _react.default.createElement(_Container.default, {
+        className: "bg-light"
+      }, _react.default.createElement(_Row.default, {
+        className: "justify-content-md-center"
+      }, _react.default.createElement(_Col.default, {
+        xs: 12,
+        sm: 8,
+        md: 8
+      }, _react.default.createElement("div", {
         className: "movie-title"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Title: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Title)), _react.default.createElement("div", {
-        className: "movie-description"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Description: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Description)), _react.default.createElement("div", {
+      }, _react.default.createElement(_Image.default, {
+        className: "img-responsive center-block",
+        src: movie.ImagePath,
+        fluid: true
+      }), _react.default.createElement("br", null), _react.default.createElement("h1", {
+        className: "label fancy"
+      }, movie.Title, " ")), _react.default.createElement("div", {
         className: "movie-genre"
       }, _react.default.createElement("span", {
-        className: "label"
+        className: "label fancy"
       }, "Genre: "), _react.default.createElement("span", {
-        className: "value"
+        className: "value fancy"
       }, movie.Genre.Name)), _react.default.createElement("div", {
         className: "movie-director"
       }, _react.default.createElement("span", {
-        className: "label"
+        className: "label fancy"
       }, "Director: "), _react.default.createElement("span", {
+        className: "value fancy"
+      }, movie.Director.Name)), _react.default.createElement("div", {
+        className: "movie-description"
+      }, _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)), _react.default.createElement(_reactRouterDom.Link, {
+      }, movie.Description)), _react.default.createElement(_reactRouterDom.Link, {
         to: "/directors/".concat(movie.Director.Name)
       }, _react.default.createElement(_Button.default, {
         variant: "link"
@@ -48820,7 +48821,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         to: "/genres/".concat(movie.Genre.Name)
       }, _react.default.createElement(_Button.default, {
         variant: "link"
-      }, "Genre"))))));
+      }, "Genre")))));
     }
   }]);
 
@@ -48828,7 +48829,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap":"../../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Image":"../../node_modules/react-bootstrap/esm/Image.js"}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
