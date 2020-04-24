@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -25,22 +28,29 @@ export function LoginView(props) {
   };
 
   return (
+    <Container className="bg-light d-flex flex-row align justify-content-center">
+      <Row>
+        <Col>
+          <h1 className="fancy">Log in</h1><br />
+          <form>
 
-    <form>
-      <h1 className="fancy">My Flix</h1><br />
-      <label>
-        Username:
+            <label>
+              Username:
       <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
+            </label><br />
+            <label>
+              Password:
       <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label><br />
-      <Button type="Button" onClick={handleSubmit} className="d-flex justify-content-center">Submit</Button>
-      <Link to={`/register`}>
-        <Button variant="link">Sign Up</Button>
-      </Link>
-    </form>
+            </label>
+          </form>
 
+          <div className="d-flex justify-content-center">
+            <Button type="Button" onClick={handleSubmit}>Submit</Button>
+            <Link to={`/register`}>
+              <Button variant="link">Sign Up</Button>
+            </Link>
+          </div>
+        </Col></Row>
+    </Container >
   );
 }

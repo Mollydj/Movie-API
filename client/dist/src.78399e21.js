@@ -48519,11 +48519,15 @@ var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _reactBootstrap = require("react-bootstrap");
 
-var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
-
 var _axios = _interopRequireDefault(require("axios"));
 
 var _reactRouterDom = require("react-router-dom");
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48568,31 +48572,34 @@ function LoginView(props) {
     });
   };
 
-  return _react.default.createElement("form", null, _react.default.createElement("h1", {
+  return _react.default.createElement(_Container.default, {
+    className: "bg-light d-flex flex-row align justify-content-center"
+  }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("h1", {
     className: "fancy"
-  }, "My Flix"), _react.default.createElement("br", null), _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
+  }, "Log in"), _react.default.createElement("br", null), _react.default.createElement("form", null, _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
     type: "text",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  })), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
+  })), _react.default.createElement("br", null), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
     type: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
-    type: "Button",
-    onClick: handleSubmit,
+  }))), _react.default.createElement("div", {
     className: "d-flex justify-content-center"
+  }, _react.default.createElement(_reactBootstrap.Button, {
+    type: "Button",
+    onClick: handleSubmit
   }, "Submit"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/register"
   }, _react.default.createElement(_reactBootstrap.Button, {
     variant: "link"
-  }, "Sign Up")));
+  }, "Sign Up"))))));
 }
-},{"react":"../../node_modules/react/index.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/esm/Form.js","react-bootstrap":"../../node_modules/react-bootstrap/esm/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","axios":"../../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/esm/Form.js","react-bootstrap":"../../node_modules/react-bootstrap/esm/index.js","axios":"../../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48843,6 +48850,12 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -48901,7 +48914,9 @@ function RegistrationView(props) {
 
   return _react.default.createElement("div", {
     className: "register-view"
-  }, _react.default.createElement("form", null, _react.default.createElement("h1", {
+  }, _react.default.createElement(_Container.default, {
+    className: "bg-light d-flex flex-row align justify-content-center"
+  }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("form", null, _react.default.createElement("h1", {
     className: "fancy"
   }, "My Flix"), _react.default.createElement("br", null), _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
     type: "text",
@@ -48910,7 +48925,7 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  })), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
+  })), _react.default.createElement("br", null), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
     type: "password",
     value: password,
     placeholder: "Password",
@@ -48930,13 +48945,14 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setBirthday(e.target.value);
     }
-  })), _react.default.createElement("br", null), _react.default.createElement(_Button.default, {
-    type: "button",
-    onClick: updateUser,
+  })), _react.default.createElement("br", null), _react.default.createElement("div", {
     className: "d-flex justify-content-center"
-  }, "Submit")));
+  }, _react.default.createElement(_Button.default, {
+    type: "button",
+    onClick: updateUser
+  }, "Submit")))))));
 }
-},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
