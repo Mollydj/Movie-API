@@ -48787,8 +48787,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "justify-content-md-center"
       }, _react.default.createElement(_Col.default, {
         xs: 12,
-        sm: 8,
-        md: 8
+        sm: 10,
+        md: 10
       }, _react.default.createElement("div", {
         className: "movie-title"
       }, _react.default.createElement(_Image.default, {

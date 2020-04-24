@@ -23,7 +23,7 @@ export class MovieView extends React.Component {
 
       <Container className="bg-light">
         <Row className="justify-content-md-center">
-          <Col xs={12} sm={8} md={8}>
+          <Col xs={12} sm={10} md={10}>
             <div className="movie-title">
               <Image className="img-responsive center-block" src={movie.ImagePath} fluid /><br />
               <h1 className="label fancy">{movie.Title} </h1>
