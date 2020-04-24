@@ -49225,6 +49225,20 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "deleteMovie",
+    value: function deleteMovie(MovieId) {
+      _axios.default.delete("https://ach2.herokuapp.com/users/".concat(localStorage.getItem('user'), "/Movies/").concat(MovieId), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        document.location.reload(true);
+        console.log('movie deleted');
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -49257,12 +49271,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           src: movie.ImagePath
         }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
           className: "fancy"
-        }, movie.Title), _react.default.createElement(_reactRouterDom.Link, {
-          to: "/movies/".concat(movie._id)
-        }, _react.default.createElement(_Button.default, {
-          variant: "link",
+        }, movie.Title), _react.default.createElement(_Button.default, {
+          onClick: _this3.deleteMovie,
           className: "fancy"
-        }, "delete")))));
+        }, "delete"))));
       }))), _react.default.createElement(_reactRouterDom.Link, {
         to: "/logout"
       }, _react.default.createElement(_Button.default, {
@@ -49276,7 +49288,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "danger",
-        onClick: deregister
+        onClick: this.deregister
       }, "Delete Account")), _react.default.createElement(_reactRouterDom.Link, {
         to: "/updateUser"
       }, _react.default.createElement(_Button.default, {

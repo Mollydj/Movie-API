@@ -170,20 +170,20 @@ app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { sess
 
 // DELETE //////////////////////////////////////////////
 //Allow users to remove a movie from their list of favorites - 7 
-/*app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', {session: false}), function(req, res) {
+app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { session: false }), function (req, res) {
   Movies.findOneAndRemove({ Title: req.params.title })
-  .then(function(user) {
-    if (!user) {
-      res.status(400).send(req.params.Title + " was not found");
-    } else {
-      res.status(200).send(req.params.Title + " was deleted.");
-    }
-  })
-  .catch(function(err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-});*/
+    .then(function (user) {
+      if (!user) {
+        res.status(400).send(req.params.Title + " was not found");
+      } else {
+        res.status(200).send(req.params.Title + " was deleted.");
+      }
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
 
 app.delete(
   "/users/:Username/Movies/:MovieID",

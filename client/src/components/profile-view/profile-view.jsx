@@ -36,11 +36,23 @@ export class ProfileView extends React.Component {
       });
   }
 
+  deleteMovie(MovieId) {
+    axios.delete(`https://ach2.herokuapp.com/users/${localStorage.getItem('user')}/Movies/${MovieId}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+
+    })
+      .then(response => {
+        document.location.reload(true);
+        console.log('movie deleted')
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
 
   render() {
     const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
-
-
     return (
       <Card style={{ width: '30rem' }}>
         <Card.Body>
@@ -61,9 +73,9 @@ export class ProfileView extends React.Component {
                       <Card.Body>
                         <Card.Title className="fancy">{movie.Title}</Card.Title>
 
-                        <Link to={`/movies/${movie._id}`}>
-                          <Button variant="link" className="fancy">delete</Button>
-                        </Link>
+
+                        <Button onClick={this.deleteMovie} className="fancy">delete</Button>
+
 
 
                       </Card.Body>
@@ -83,7 +95,7 @@ export class ProfileView extends React.Component {
           </Link>
 
           <Link to={`/`} >
-            <Button variant="danger" onClick={deregister}>Delete Account</Button>
+            <Button variant="danger" onClick={this.deregister}>Delete Account</Button>
           </Link>
 
           <Link to={`/updateUser`}>
