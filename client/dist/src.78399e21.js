@@ -49237,6 +49237,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        window.open('/', '_self');
 
         _this2.setState({
           user: null
@@ -49492,7 +49493,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "fancy",
         to: "/users/".concat(user)
       }, " ", user, " "))), _react.default.createElement("div", {
-        className: "main-view"
+        className: "main-view align justify-content-center"
       }, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",

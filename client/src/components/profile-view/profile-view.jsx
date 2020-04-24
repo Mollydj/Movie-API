@@ -26,9 +26,11 @@ export class ProfileView extends React.Component {
       .then(response => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        window.open('/', '_self');
         this.setState({
           user: null
         });
+
         console.log('user deleted')
       })
       .catch(function (error) {

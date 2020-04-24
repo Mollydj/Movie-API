@@ -106,7 +106,7 @@ export class MainView extends React.Component {
 
 
 
-        <div className="main-view">
+        <div className="main-view align justify-content-center">
           <Route exact path="/" render={() => {
             if (!user || user.length === 0) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return movies.map(m => <MovieCard key={m._id} movie={m} />)
