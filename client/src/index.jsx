@@ -1,16 +1,24 @@
-// client/src/index.jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-import { MainView } from './components/main-view/main-view';
+import moviesApp from '../src/reducers/reducers';
+import MainView from './components/main-view/main-view';
 
 // Import statement to indicate that we need to bundle `./index.scss`
 import './index.scss';
+console.log('Molly is Here', moviesApp)
+const store = createStore(moviesApp);
 
 // Main component (will eventually use all the others)
 class MyFlixApplication extends React.Component {
   render() {
-    return <MainView/>;
+    return (
+      <Provider store={store}>
+        <MainView />
+      </Provider>
+    );
   }
 }
 

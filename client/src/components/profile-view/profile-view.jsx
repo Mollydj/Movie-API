@@ -67,10 +67,10 @@ export class ProfileView extends React.Component {
           <Col>
             <h2 className="fancy">Profile</h2>
             <div className="pretty">
-              Username:            {this.props.profile.Username}<br />
+              Username:            {this.props.user.Username}<br />
             Password:           <br />
-            Email:            {this.props.profile.Email}<br />
-            Birthday:            {this.props.profile.Birthday}<br /><br />
+            Email:            {this.props.user.Email}<br />
+            Birthday:            {this.props.user.Birthday}<br /><br />
               <h3 className="fancy">Favorite Movies</h3>
               <ul className="ml- pl-0 card-body d-flex flex-row align justify-content-center">
                 {userMovies.map(movie =>
