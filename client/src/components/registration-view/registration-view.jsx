@@ -14,7 +14,7 @@ export function RegistrationView(props) {
 
   const newUser = (e) => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
-    axios.post('https://ach2.herokuapp.com/users', {
+    axios.post('/users', {
       Username: username,
       Password: password,
       Email: email,

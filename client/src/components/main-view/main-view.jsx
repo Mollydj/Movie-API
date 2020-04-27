@@ -94,7 +94,7 @@ export class MainView extends React.Component {
 
 
     return (
-      <Router basename="/client">
+      <Router>
         <Navbar expand="lg" variant="light" className="Navstyle">
           <Container>
             <Navbar.Brand href="/" className="fancy">Myflix</Navbar.Brand>
