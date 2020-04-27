@@ -130,8 +130,6 @@ export class ProfileView extends React.Component {
 
                 <h3 className="fancy">Favorite Movies</h3>
 
-
-
               </div>
 
 
