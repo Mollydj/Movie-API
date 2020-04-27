@@ -100,6 +100,7 @@ export class MainView extends React.Component {
           <Container>
             <Navbar.Brand href="/" className="fancy">Myflix</Navbar.Brand>
             <Link className="fancy" to={`/users/${user}`}> {user} </Link>
+
           </Container>
 
         </Navbar>
@@ -160,4 +161,3 @@ let mapStateToProps = state => {
 
 // #4
 export default connect(mapStateToProps, { setMovies, profile })(MainView);
-
