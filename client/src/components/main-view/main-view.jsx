@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 
 import { connect } from 'react-redux';
 import MoviesList from '../movies-list/movies-list';
-import { setMovies, profile, setFilter } from '../../actions/actions';
+import { setMovies, profile } from '../../actions/actions';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -40,7 +40,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);//after user logged in get movie data
-      // this.getUsers(accessToken);
+      this.getUsers(accessToken);
     }
   }
 
@@ -79,11 +79,11 @@ export class MainView extends React.Component {
     this.setState({
       user: authData.user.Username
     });
-    this.props.setUser(authData.user);
+    //this.props.setUser(authData.user);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
-    //this.getUsers(authData.token);
+    this.getUsers(authData.token);
   }
 
   render() {
@@ -160,4 +160,4 @@ let mapStateToProps = state => {
 }
 
 // #4
-export default connect(mapStateToProps, { setMovies, profile, setFilter })(MainView);
+export default connect(mapStateToProps, { setMovies, profile })(MainView);

@@ -51394,7 +51394,7 @@ function RegistrationView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var updateUser = function updateUser(e) {
+  var newUser = function newUser(e) {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
 
     _axios.default.post('https://ach2.herokuapp.com/users', {
@@ -51448,7 +51448,7 @@ function RegistrationView(props) {
     className: "d-flex justify-content-center"
   }, _react.default.createElement(_Button.default, {
     type: "button",
-    onClick: updateUser
+    onClick: newUser
   }, "Submit")))))));
 }
 },{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
@@ -51816,6 +51816,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var userFaves = movies.filter(function (g) {
         return FavoriteMovies.includes(g._id);
       });
+      var birthday = Date();
       return _react.default.createElement("div", null, _react.default.createElement(_Container.default, {
         className: "bg-light"
       }, _react.default.createElement(_reactRouterDom.Link, {
@@ -51827,7 +51828,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "fancy"
       }, "Profile"), _react.default.createElement("div", {
         className: "pretty"
-      }, "Username:            ", Username, _react.default.createElement("br", null), "Password:           ", _react.default.createElement("br", null), "Email:            ", Email, _react.default.createElement("br", null), "Birthday:            ", Birthday, _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("h3", {
+      }, "Username:            ", Username, _react.default.createElement("br", null), "Email:            ", Email, _react.default.createElement("br", null), "Birthday:        ", Birthday, _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("h3", {
         className: "fancy"
       }, "Favorite Movies"), userFaves.map(function (movie, i) {
         return _react.default.createElement(_Card.default, {
@@ -51883,6 +51884,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.UpdateUser = UpdateUser;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -51895,6 +51897,8 @@ var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51914,9 +51918,15 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var mapStateToProps = function mapStateToProps(state) {
+  var movies = state.movies;
+  return {
+    movies: movies
+  };
+};
+
 function UpdateUser(props) {
-  var profile = props.profile,
-      user = props.user;
+  var user = props.user;
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -51955,6 +51965,7 @@ function UpdateUser(props) {
       localStorage.setItem('user', data.Username);
       window.open("/users/".concat(localStorage.getItem('user')), '_self');
       console.log('user updated');
+      alert('Your profile was updated successfully');
     }).catch(function (error) {
       console.log(error);
     });
@@ -51969,7 +51980,7 @@ function UpdateUser(props) {
   }, "Update Profile"), _react.default.createElement("br", null), _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
     type: "text",
     value: username,
-    placeholder: profile.Username,
+    placeholder: "Username",
     onChange: function onChange(e) {
       return updateUsername(e.target.value);
     }
@@ -51983,7 +51994,7 @@ function UpdateUser(props) {
   })), _react.default.createElement("br", null), _react.default.createElement("label", null, "Email:", _react.default.createElement("input", {
     type: "Email",
     value: email,
-    placeholder: profile.Email,
+    placeholder: "Email",
     onChange: function onChange(e) {
       return updateEmail(e.target.value);
     }
@@ -51999,7 +52010,11 @@ function UpdateUser(props) {
     onClick: updateUser
   }, "Submit"))))));
 }
-},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+
+var _default = (0, _reactRedux.connect)(mapStateToProps)(UpdateUser);
+
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-redux":"../../node_modules/react-redux/es/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52099,7 +52114,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           user: localStorage.getItem('user')
         });
         this.getMovies(accessToken); //after user logged in get movie data
-        // this.getUsers(accessToken);
+
+        this.getUsers(accessToken);
       }
     }
   }, {
@@ -52138,11 +52154,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       console.log(authData);
       this.setState({
         user: authData.user.Username
-      });
-      this.props.setUser(authData.user);
+      }); //this.props.setUser(authData.user);
+
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
-      this.getMovies(authData.token); //this.getUsers(authData.token);
+      this.getMovies(authData.token);
+      this.getUsers(authData.token);
     }
   }, {
     key: "render",
@@ -52269,8 +52286,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
   setMovies: _actions.setMovies,
-  profile: _actions.profile,
-  setFilter: _actions.setFilter
+  profile: _actions.profile
 })(MainView);
 
 exports.default = _default;
@@ -52502,7 +52518,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58217" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60585" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

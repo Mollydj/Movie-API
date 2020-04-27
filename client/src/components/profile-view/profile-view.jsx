@@ -106,7 +106,7 @@ export class ProfileView extends React.Component {
     const { Username, Email, Birthday, FavoriteMovies } = this.state;
     const { movies } = this.props;
     const userFaves = movies.filter(g => FavoriteMovies.includes(g._id))
-
+    const birthday = Date()
 
     return (
       <div>
@@ -119,9 +119,8 @@ export class ProfileView extends React.Component {
               <h2 className="fancy">Profile</h2>
               <div className="pretty">
                 Username:            {Username}<br />
-            Password:           <br />
             Email:            {Email}<br />
-            Birthday:            {Birthday}<br /><br />
+            Birthday:        {Birthday}<br /><br />
 
 
                 <h3 className="fancy">Favorite Movies</h3>
