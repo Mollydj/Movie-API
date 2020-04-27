@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 
 import { connect } from 'react-redux';
 import MoviesList from '../movies-list/movies-list';
-import { setMovies, setFilter, setUser } from '../../actions/actions';
+import { setMovies, profile } from '../../actions/actions';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -27,8 +27,8 @@ export class MainView extends React.Component {
 
     this.state = {
       movies: [],
-      profile: [],
-      user: []
+      profile: {},
+      user: null
     };
   }
 
@@ -64,10 +64,8 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        this.setState({
-          profile: response.data
+        this.props.profile(response.data);
 
-        });
       })
       .catch(function (error) {
         console.log(error);
@@ -77,10 +75,11 @@ export class MainView extends React.Component {
 
 
   onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
       user: authData.user.Username
     });
-
+    this.props.setUser(authData.user);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
@@ -90,7 +89,7 @@ export class MainView extends React.Component {
   render() {
     // const { movies, user, profile, onLoggedOut } = this.state;
     let { movies } = this.props;
-    let { user } = this.state;
+    let { user, profile } = this.state;
 
 
 
@@ -154,9 +153,11 @@ export class MainView extends React.Component {
 
 // #3
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return {
+    movies: state.movies,
+  }
 }
 
 // #4
-export default connect(mapStateToProps, { setMovies, setUser, setFilter })(MainView);
+export default connect(mapStateToProps, { setMovies, profile })(MainView);
 

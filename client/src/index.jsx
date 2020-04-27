@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-
-import moviesApp from '../src/reducers/reducers';
+import { Provider, connect } from 'react-redux';
 import MainView from './components/main-view/main-view';
+import moviesApp from '../src/reducers/reducers';
+
 
 // Import statement to indicate that we need to bundle `./index.scss`
 import './index.scss';
-console.log('Molly is Here', moviesApp)
+
 const store = createStore(moviesApp);
 
 // Main component (will eventually use all the others)
@@ -21,6 +21,8 @@ class MyFlixApplication extends React.Component {
     );
   }
 }
+
+
 
 // Find the root of our app
 const container = document.getElementsByClassName('app-container')[0];
