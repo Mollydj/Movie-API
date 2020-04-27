@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import { setMovies, profile, setFilter } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -55,7 +55,7 @@ export class ProfileView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        const movies = localStorage.getItem('movies');
+        //const movies = localStorage.getItem('movies');
         this.setState({
           Username: response.data.Username,
           Password: response.data.Password,
@@ -69,6 +69,8 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   }
+
+
 
   deregister() {
     axios.delete(`https://ach2.herokuapp.com/users/${localStorage.getItem('user')}`, {
@@ -107,15 +109,14 @@ export class ProfileView extends React.Component {
     //(this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
 
     const { Username, Email, Birthday, FavoriteMovies } = this.state;
-    const user = localStorage.getItem('user');
+    const { movies } = this.props;
     console.log(FavoriteMovies)
-
 
 
     return (
       <div>
         <Container className="bg-light">
-          <Link to={`/update/${user}`}>
+          <Link to={`/update/${Username}`}>
             <Button variant="link" className="float-right">Edit Profile</Button>
           </Link>
           <Row>
@@ -129,7 +130,9 @@ export class ProfileView extends React.Component {
 
 
                 <h3 className="fancy">Favorite Movies</h3>
-
+                {movies.map((movie, i) =>
+                  <li key={i}>{movie.Title}</li>
+                )}
               </div>
 
 
@@ -141,4 +144,4 @@ export class ProfileView extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(ProfileView);
+export default connect(mapStateToProps, { setMovies, profile, setFilter })(ProfileView);

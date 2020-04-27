@@ -51655,6 +51655,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _actions = require("../../actions/actions");
+
 var _moviesList = _interopRequireDefault(require("../movies-list/movies-list"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
@@ -51752,8 +51754,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        var movies = localStorage.getItem('movies');
-
+        //const movies = localStorage.getItem('movies');
         _this2.setState({
           Username: response.data.Username,
           Password: response.data.Password,
@@ -51812,12 +51813,12 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Email = _this$state.Email,
           Birthday = _this$state.Birthday,
           FavoriteMovies = _this$state.FavoriteMovies;
-      var user = localStorage.getItem('user');
+      var movies = this.props.movies;
       console.log(FavoriteMovies);
       return _react.default.createElement("div", null, _react.default.createElement(_Container.default, {
         className: "bg-light"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/update/".concat(user)
+        to: "/update/".concat(Username)
       }, _react.default.createElement(_Button.default, {
         variant: "link",
         className: "float-right"
@@ -51827,7 +51828,11 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "pretty"
       }, "Username:            ", Username, _react.default.createElement("br", null), "Password:           ", _react.default.createElement("br", null), "Email:            ", Email, _react.default.createElement("br", null), "Birthday:            ", Birthday, _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("h3", {
         className: "fancy"
-      }, "Favorite Movies"))))));
+      }, "Favorite Movies"), movies.map(function (movie, i) {
+        return _react.default.createElement("li", {
+          key: i
+        }, movie.Title);
+      }))))));
     }
   }]);
 
@@ -51836,10 +51841,14 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
 exports.ProfileView = ProfileView;
 
-var _default = (0, _reactRedux.connect)(mapStateToProps)(ProfileView);
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  setMovies: _actions.setMovies,
+  profile: _actions.profile,
+  setFilter: _actions.setFilter
+})(ProfileView);
 
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../../node_modules/react-redux/es/index.js"}],"components/update-view/update-profile.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","../../actions/actions":"actions/actions.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../../node_modules/react-redux/es/index.js"}],"components/update-view/update-profile.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52232,7 +52241,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
   setMovies: _actions.setMovies,
-  profile: _actions.profile
+  profile: _actions.profile,
+  setFilter: _actions.setFilter
 })(MainView);
 
 exports.default = _default;

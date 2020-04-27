@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 
 import { connect } from 'react-redux';
 import MoviesList from '../movies-list/movies-list';
-import { setMovies, profile } from '../../actions/actions';
+import { setMovies, profile, setFilter } from '../../actions/actions';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -160,4 +160,4 @@ let mapStateToProps = state => {
 }
 
 // #4
-export default connect(mapStateToProps, { setMovies, profile })(MainView);
+export default connect(mapStateToProps, { setMovies, profile, setFilter })(MainView);
