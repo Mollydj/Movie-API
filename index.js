@@ -1,4 +1,4 @@
-const path = require("path");
+
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -9,7 +9,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 require('./passport');
 const { check, validationResult } = require('express-validator');
-
+const path = require("path");
 
 const app = express();
 const cors = require('cors');
@@ -28,6 +28,10 @@ app.use(morgan("common")); // Logging with Morgan
 app.use(bodyParser.json()); // Using bodyParser
 var auth = require('./auth')(app);
 
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
 //ERROR HANDLING
 
 app.use((err, req, res, next) => {
@@ -37,9 +41,6 @@ app.use((err, req, res, next) => {
 
 
 // GET //////////////////////////////////////////////
-app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
 
 
 //All movies to the user ok - 1
