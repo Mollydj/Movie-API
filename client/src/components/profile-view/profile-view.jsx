@@ -55,14 +55,12 @@ export class ProfileView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        //const movies = localStorage.getItem('movies');
         this.setState({
           Username: response.data.Username,
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies
-
         });
       })
       .catch(function (error) {
@@ -105,12 +103,9 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    //const user = this.props.profile.Username
-    //(this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
-
     const { Username, Email, Birthday, FavoriteMovies } = this.state;
     const { movies } = this.props;
-    console.log(FavoriteMovies)
+    const userFaves = movies.filter(g => FavoriteMovies.includes(g._id))
 
 
     return (
@@ -130,11 +125,29 @@ export class ProfileView extends React.Component {
 
 
                 <h3 className="fancy">Favorite Movies</h3>
-                {movies.map((movie, i) =>
-                  <li key={i}>{movie.Title}</li>
-                )}
-              </div>
 
+                {userFaves.map((movie, i) =>
+                  <Card style={{ width: '10rem' }} md={4}>
+                    <Card.Img variant="top" src={movie.ImagePath} />
+                    <Card.Body>
+                      <Card.Title className="fancy">{movie.Title}</Card.Title>
+                      <Button className="fancy" onClick={e => this.deleteMovie(movie._id)}>delete</Button>
+                    </Card.Body>
+                  </Card>
+                )}
+
+              </div>
+              <Link to={`/logout`}>
+                <Button variant="link" onClick={this.onLoggedOut}>Logout</Button>
+              </Link>
+
+              <Link to={`/`}>
+                <Button variant="link">Back to Movies</Button>
+              </Link>
+
+              <Link to={`/`} >
+                <Button variant="danger" onClick={this.deregister}>Delete Account</Button>
+              </Link>
 
             </Col>
           </Row>

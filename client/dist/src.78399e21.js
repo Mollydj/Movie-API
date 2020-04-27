@@ -51754,7 +51754,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        //const movies = localStorage.getItem('movies');
         _this2.setState({
           Username: response.data.Username,
           Password: response.data.Password,
@@ -51806,15 +51805,17 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      //const user = this.props.profile.Username
-      //(this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
+      var _this4 = this;
+
       var _this$state = this.state,
           Username = _this$state.Username,
           Email = _this$state.Email,
           Birthday = _this$state.Birthday,
           FavoriteMovies = _this$state.FavoriteMovies;
       var movies = this.props.movies;
-      console.log(FavoriteMovies);
+      var userFaves = movies.filter(function (g) {
+        return FavoriteMovies.includes(g._id);
+      });
       return _react.default.createElement("div", null, _react.default.createElement(_Container.default, {
         className: "bg-light"
       }, _react.default.createElement(_reactRouterDom.Link, {
@@ -51828,11 +51829,38 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "pretty"
       }, "Username:            ", Username, _react.default.createElement("br", null), "Password:           ", _react.default.createElement("br", null), "Email:            ", Email, _react.default.createElement("br", null), "Birthday:            ", Birthday, _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("h3", {
         className: "fancy"
-      }, "Favorite Movies"), movies.map(function (movie, i) {
-        return _react.default.createElement("li", {
-          key: i
-        }, movie.Title);
-      }))))));
+      }, "Favorite Movies"), userFaves.map(function (movie, i) {
+        return _react.default.createElement(_Card.default, {
+          style: {
+            width: '10rem'
+          },
+          md: 4
+        }, _react.default.createElement(_Card.default.Img, {
+          variant: "top",
+          src: movie.ImagePath
+        }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
+          className: "fancy"
+        }, movie.Title), _react.default.createElement(_Button.default, {
+          className: "fancy",
+          onClick: function onClick(e) {
+            return _this4.deleteMovie(movie._id);
+          }
+        }, "delete")));
+      })), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/logout"
+      }, _react.default.createElement(_Button.default, {
+        variant: "link",
+        onClick: this.onLoggedOut
+      }, "Logout")), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, _react.default.createElement(_Button.default, {
+        variant: "link"
+      }, "Back to Movies")), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, _react.default.createElement(_Button.default, {
+        variant: "danger",
+        onClick: this.deregister
+      }, "Delete Account"))))));
     }
   }]);
 
