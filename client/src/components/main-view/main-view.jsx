@@ -79,7 +79,7 @@ export class MainView extends React.Component {
     this.setState({
       user: authData.user.Username
     });
-    //this.props.setUser(authData.user);
+    // this.props.setUser(authData.user);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
@@ -94,12 +94,12 @@ export class MainView extends React.Component {
 
 
     return (
+
       <Router>
         <Navbar expand="lg" variant="light" className="Navstyle">
           <Container>
             <Navbar.Brand href="/" className="fancy">Myflix</Navbar.Brand>
             <Link className="fancy" to={`/users/${user}`}> {user} </Link>
-
           </Container>
 
         </Navbar>

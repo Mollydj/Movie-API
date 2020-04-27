@@ -51172,7 +51172,7 @@ function LoginView(props) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
 
-    _axios.default.post('https://ach2.herokuapp.com/login', {
+    _axios.default.post('http://ach2.herokuapp.com/login', {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -51394,10 +51394,10 @@ function RegistrationView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var newUser = function newUser(e) {
+  var updateUser = function updateUser(e) {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
 
-    _axios.default.post('/users', {
+    _axios.default.post('https://ach2.herokuapp.com/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -51405,7 +51405,7 @@ function RegistrationView(props) {
     }).then(function (response) {
       var data = response.data;
       console.log(data);
-      window.open('/client', '_self');
+      window.open('/', '_self');
     }).catch(function (e) {
       console.log('error registering the user');
     });
@@ -51448,7 +51448,7 @@ function RegistrationView(props) {
     className: "d-flex justify-content-center"
   }, _react.default.createElement(_Button.default, {
     type: "button",
-    onClick: newUser
+    onClick: updateUser
   }, "Submit")))))));
 }
 },{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
@@ -52154,7 +52154,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       console.log(authData);
       this.setState({
         user: authData.user.Username
-      }); //this.props.setUser(authData.user);
+      }); // this.props.setUser(authData.user);
 
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
@@ -52518,7 +52518,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56919" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50686" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -12,9 +12,9 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const newUser = (e) => {
+  const updateUser = (e) => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
-    axios.post('/users', {
+    axios.post('https://ach2.herokuapp.com/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -23,7 +23,7 @@ export function RegistrationView(props) {
       .then(response => {
         const data = response.data;
         console.log(data);
-        window.open('/client', '_self');
+        window.open('/', '_self');
       })
       .catch(e => {
         console.log('error registering the user')
@@ -55,7 +55,7 @@ export function RegistrationView(props) {
               </label><br />
 
               <div className="d-flex justify-content-center">
-                <Button type="button" onClick={newUser} >Submit</Button>
+                <Button type="button" onClick={updateUser} >Submit</Button>
               </div>
 
             </form>

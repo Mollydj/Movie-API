@@ -14,7 +14,7 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
-    axios.post('https://ach2.herokuapp.com/login', {
+    axios.post('http://ach2.herokuapp.com/login', {
       Username: username,
       Password: password
     })
