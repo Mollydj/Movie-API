@@ -51742,7 +51742,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function onLoggedOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.open('/client', '_self');
+      window.open('/', '_self');
     }
   }, {
     key: "getUsers",
