@@ -6,10 +6,18 @@ import { Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { connect } from 'react-redux';
 
 export class DirectorView extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {};
+  }
   render() {
-    const { director, movie } = this.props;
+    const { director } = this.props;
+
+    if (!director) return null;
 
     return (
       <Container className="bg-light d-flex flex-row align justify-content-center">
@@ -26,3 +34,5 @@ export class DirectorView extends React.Component {
     )
   }
 }
+
+export default connect(({ movies }) => ({ movies }))(DirectorView);

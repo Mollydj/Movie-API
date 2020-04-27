@@ -6,11 +6,19 @@ import { Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { connect } from 'react-redux';
 
 export class GenreView extends React.Component {
-  render() {
-    const { genre, movie } = this.props;
+  constructor() {
+    super();
 
+    this.state = {};
+  }
+
+  render() {
+    const { genre } = this.props;
+
+    if (!genre) return null;
     return (
       <Container className="bg-light d-flex flex-row align justify-content-center">
         <Row>
@@ -26,3 +34,4 @@ export class GenreView extends React.Component {
     )
   }
 }
+export default connect(({ movies }) => ({ movies }))(GenreView);
