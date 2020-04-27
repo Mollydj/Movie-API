@@ -35,7 +35,7 @@ export function UpdateUser(props) {
       .then(response => {
         const data = response.data;
         localStorage.setItem('user', data.Username);
-        window.open(`/users/${localStorage.getItem('user')}`, '_self');
+        window.open(`client/users/${localStorage.getItem('user')}`, '_self');
         console.log('user updated')
         alert('Your profile was updated successfully')
       })

@@ -46,7 +46,7 @@ export class ProfileView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.open('/', '_self');
+    window.open('/client', '_self');
   }
 
   getUsers(token) {
@@ -77,7 +77,7 @@ export class ProfileView extends React.Component {
       .then(response => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.open('/', '_self');
+        window.open('/client', '_self');
         this.setState({
           user: null
         });

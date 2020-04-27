@@ -51405,7 +51405,7 @@ function RegistrationView(props) {
     }).then(function (response) {
       var data = response.data;
       console.log(data);
-      window.open('/', '_self');
+      window.open('/client', '_self');
     }).catch(function (e) {
       console.log('error registering the user');
     });
@@ -51742,7 +51742,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function onLoggedOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.open('/', '_self');
+      window.open('/client', '_self');
     }
   }, {
     key: "getUsers",
@@ -51777,7 +51777,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.open('/', '_self');
+        window.open('/client', '_self');
 
         _this3.setState({
           user: null
@@ -51963,7 +51963,7 @@ function UpdateUser(props) {
     }).then(function (response) {
       var data = response.data;
       localStorage.setItem('user', data.Username);
-      window.open("/users/".concat(localStorage.getItem('user')), '_self');
+      window.open("client/users/".concat(localStorage.getItem('user')), '_self');
       console.log('user updated');
       alert('Your profile was updated successfully');
     }).catch(function (error) {
@@ -52171,7 +52171,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this$state = this.state,
           user = _this$state.user,
           profile = _this$state.profile;
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Navbar.default, {
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, {
+        basename: "/client"
+      }, _react.default.createElement(_Navbar.default, {
         expand: "lg",
         variant: "light",
         className: "Navstyle"
@@ -52518,7 +52520,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60585" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55184" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -52695,4 +52697,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
-//# sourceMappingURL=/src.78399e21.js.map
+//# sourceMappingURL=/client/src.78399e21.js.map
