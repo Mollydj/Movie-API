@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-
+import MoviesList from '../movies-list/movies-list';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => {
   const { movies } = state;
   return { movies };
+
 };
 
 
@@ -22,6 +23,7 @@ export class ProfileView extends React.Component {
 
   constructor() {
     super();
+
     this.state = {
       Username: null,
       Password: null,
@@ -59,7 +61,8 @@ export class ProfileView extends React.Component {
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
-          // favoriteMovies: response.data.FavoriteMovies.map(id => JSON.parse(movies).find(m => m._id === id))
+          FavoriteMovies: response.data.FavoriteMovies
+
         });
       })
       .catch(function (error) {
@@ -101,17 +104,20 @@ export class ProfileView extends React.Component {
 
   render() {
     //const user = this.props.profile.Username
-    //const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
+    //(this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
 
     const { Username, Email, Birthday, FavoriteMovies } = this.state;
     const user = localStorage.getItem('user');
+    console.log(FavoriteMovies)
 
-    console.log(user)
+
 
     return (
       <div>
         <Container className="bg-light">
-
+          <Link to={`/update/${user}`}>
+            <Button variant="link" className="float-right">Edit Profile</Button>
+          </Link>
           <Row>
             <Col>
               <h2 className="fancy">Profile</h2>
@@ -120,13 +126,19 @@ export class ProfileView extends React.Component {
             Password:           <br />
             Email:            {Email}<br />
             Birthday:            {Birthday}<br /><br />
+
+
                 <h3 className="fancy">Favorite Movies</h3>
+
+
+
               </div>
+
 
             </Col>
           </Row>
         </Container>
-      </div>
+      </div >
     )
   }
 }

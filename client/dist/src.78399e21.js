@@ -51216,7 +51216,7 @@ function LoginView(props) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MovieView = void 0;
+exports.default = exports.MovieView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -51231,6 +51231,8 @@ var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 
 var _Image = _interopRequireDefault(require("react-bootstrap/Image"));
+
+var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51324,7 +51326,16 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Image":"../../node_modules/react-bootstrap/esm/Image.js"}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
+
+var _default = (0, _reactRedux.connect)(function (_ref) {
+  var movies = _ref.movies;
+  return {
+    movies: movies
+  };
+})(MovieView);
+
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Image":"../../node_modules/react-bootstrap/esm/Image.js","react-redux":"../../node_modules/react-redux/es/index.js"}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51644,6 +51655,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _moviesList = _interopRequireDefault(require("../movies-list/movies-list"));
+
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
@@ -51745,8 +51758,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Username: response.data.Username,
           Password: response.data.Password,
           Email: response.data.Email,
-          Birthday: response.data.Birthday // favoriteMovies: response.data.FavoriteMovies.map(id => JSON.parse(movies).find(m => m._id === id))
-
+          Birthday: response.data.Birthday,
+          FavoriteMovies: response.data.FavoriteMovies
         });
       }).catch(function (error) {
         console.log(error);
@@ -51793,17 +51806,22 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       //const user = this.props.profile.Username
-      //const userMovies = (this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
+      //(this.props.movies.filter(g => this.props.profile.FavoriteMovies.includes(g._id)))
       var _this$state = this.state,
           Username = _this$state.Username,
           Email = _this$state.Email,
           Birthday = _this$state.Birthday,
           FavoriteMovies = _this$state.FavoriteMovies;
       var user = localStorage.getItem('user');
-      console.log(user);
+      console.log(FavoriteMovies);
       return _react.default.createElement("div", null, _react.default.createElement(_Container.default, {
         className: "bg-light"
-      }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("h2", {
+      }, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/update/".concat(user)
+      }, _react.default.createElement(_Button.default, {
+        variant: "link",
+        className: "float-right"
+      }, "Edit Profile")), _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("h2", {
         className: "fancy"
       }, "Profile"), _react.default.createElement("div", {
         className: "pretty"
@@ -51821,7 +51839,7 @@ exports.ProfileView = ProfileView;
 var _default = (0, _reactRedux.connect)(mapStateToProps)(ProfileView);
 
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../../node_modules/react-redux/es/index.js"}],"components/update-view/update-profile.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../../node_modules/react-redux/es/index.js"}],"components/update-view/update-profile.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52446,7 +52464,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56440" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58217" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

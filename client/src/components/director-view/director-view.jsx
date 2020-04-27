@@ -16,7 +16,6 @@ export class DirectorView extends React.Component {
   }
   render() {
     const { director } = this.props;
-
     if (!director) return null;
 
     return (

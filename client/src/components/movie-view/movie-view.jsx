@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
 
+import { connect } from 'react-redux';
 export class MovieView extends React.Component {
 
   constructor() {
@@ -60,3 +61,4 @@ export class MovieView extends React.Component {
     );
   }
 }
+export default connect(({ movies }) => ({ movies }))(MovieView);
