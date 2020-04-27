@@ -5,8 +5,15 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  const { movies } = state;
+  return { movies };
+}
+
 export function UpdateUser(props) {
-  const { profile, user } = props;
+  const { user } = props;
   const [username, updateUsername] = useState('');
   const [password, updatePassword] = useState('');
   const [email, updateEmail] = useState('');
@@ -28,8 +35,9 @@ export function UpdateUser(props) {
       .then(response => {
         const data = response.data;
         localStorage.setItem('user', data.Username);
-        window.open(`/users/${localStorage.getItem('user')}`, '_self');
+        window.open(`client/users/${localStorage.getItem('user')}`, '_self');
         console.log('user updated')
+        alert('Your profile was updated successfully')
       })
       .catch(function (error) {
         console.log(error);
@@ -46,7 +54,7 @@ export function UpdateUser(props) {
               <h1 className="fancy">Update Profile</h1><br />
               <label>
                 Username:
-        <input type="text" value={username} placeholder={profile.Username} onChange={e => updateUsername(e.target.value)} />
+        <input type="text" value={username} placeholder='Username' onChange={e => updateUsername(e.target.value)} />
               </label><br />
               <label>
                 Password:
@@ -54,7 +62,7 @@ export function UpdateUser(props) {
               </label><br />
               <label>
                 Email:
-        <input type="Email" value={email} placeholder={profile.Email} onChange={e => updateEmail(e.target.value)} />
+        <input type="Email" value={email} placeholder="Email" onChange={e => updateEmail(e.target.value)} />
               </label><br />
               <label>
                 Birthday:
@@ -69,3 +77,4 @@ export function UpdateUser(props) {
   );
 }
 
+export default connect(mapStateToProps)(UpdateUser);
