@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mollydj/Movie-API.git"
+    "url": "https://github.com/Mollydj/Movie-API.git"
   },
   "keywords": [],
   "author": "mdj",
@@ -38,7 +38,9 @@
     "react-bootstrap-date-picker": "^5.1.0",
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
@@ -52,6 +54,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
+    "cssnano": "^4.1.10",
     "npm-start-command": "^1.0.0",
     "sass": "^1.26.3"
   },
