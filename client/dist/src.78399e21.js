@@ -52107,11 +52107,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
+      var accessToken = localStorage.getItem("token");
 
       if (accessToken !== null) {
         this.setState({
-          user: localStorage.getItem('user')
+          user: localStorage.getItem("user")
         });
         this.getMovies(accessToken); //after user logged in get movie data
 
@@ -52123,7 +52123,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getMovies(token) {
       var _this2 = this;
 
-      _axios.default.get('https://ach2.herokuapp.com/movies', {
+      _axios.default.get("https://ach2.herokuapp.com/movies", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -52138,7 +52138,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getUsers(token) {
       var _this3 = this;
 
-      _axios.default.get("https://ach2.herokuapp.com/users/".concat(localStorage.getItem('user')), {
+      _axios.default.get("https://ach2.herokuapp.com/users/".concat(localStorage.getItem("user")), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -52156,8 +52156,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         user: authData.user.Username
       }); // this.props.setUser(authData.user);
 
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.Username);
+      localStorage.setItem("token", authData.token);
+      localStorage.setItem("user", authData.user.Username);
       this.getMovies(authData.token);
       this.getUsers(authData.token);
     }
@@ -52171,7 +52171,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this$state = this.state,
           user = _this$state.user,
           profile = _this$state.profile;
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Navbar.default, {
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, {
+        basename: "/client"
+      }, _react.default.createElement(_Navbar.default, {
         expand: "lg",
         variant: "light",
         className: "Navstyle"
@@ -52518,7 +52520,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50686" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49162" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
