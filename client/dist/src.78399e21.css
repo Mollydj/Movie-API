@@ -1,13 +1,6 @@
-:root {
-  --primary-color: #f5f0ed;
-  --secondary-color: #d4c6bd;
-  --third-color: #d6b7b5;
-  --fourth-color: #3d5361;
-}
-
 .fancy {
   font-family: "DM Serif Display", serif;
-  color: var(--fourth-color);
+  color: #3d5361;
 }
 
 .pretty {
@@ -16,7 +9,7 @@
 
 .Navstyle {
   font-family: "Signika", sans-serif;
-  background-color: var(--third-color);
+  background-color: #d6b7b5;
 }
 
 .card {
@@ -29,7 +22,7 @@
 }
 
 body {
-  background-color: var(--primary-color);
+  background-color: #f5f0ed;
   font-family: "Signika", sans-serif;
 }
 
@@ -39,7 +32,7 @@ ul {
 
 .btn {
   color: #ffffff !important;
-  background-color: var(--third-color);
+  background-color: #d6b7b5;
   margin: 10px;
   border: 0px;
 }
@@ -47,7 +40,7 @@ ul {
 .btn:hover {
   color: #ffffff !important;
   text-decoration: none;
-  background-color: var(--secondary-color);
+  background-color: #d4c6bd;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */
