@@ -51394,7 +51394,7 @@ function RegistrationView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var newUser = function newUser(e) {
+  var updateUser = function updateUser(e) {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
 
     _axios.default.post('https://ach2.herokuapp.com/users', {
@@ -51405,7 +51405,7 @@ function RegistrationView(props) {
     }).then(function (response) {
       var data = response.data;
       console.log(data);
-      window.open('/client', '_self');
+      window.open('/', '_self');
     }).catch(function (e) {
       console.log('error registering the user');
     });
@@ -51448,7 +51448,7 @@ function RegistrationView(props) {
     className: "d-flex justify-content-center"
   }, _react.default.createElement(_Button.default, {
     type: "button",
-    onClick: newUser
+    onClick: updateUser
   }, "Submit")))))));
 }
 },{"react":"../../node_modules/react/index.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","axios":"../../node_modules/axios/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/esm/Row.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
@@ -51742,7 +51742,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function onLoggedOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.open('/client', '_self');
+      window.open('/', '_self');
     }
   }, {
     key: "getUsers",
@@ -52107,11 +52107,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
+      var accessToken = localStorage.getItem("token");
 
       if (accessToken !== null) {
         this.setState({
-          user: localStorage.getItem('user')
+          user: localStorage.getItem("user")
         });
         this.getMovies(accessToken); //after user logged in get movie data
 
@@ -52123,7 +52123,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getMovies(token) {
       var _this2 = this;
 
-      _axios.default.get('https://ach2.herokuapp.com/movies', {
+      _axios.default.get("https://ach2.herokuapp.com/movies", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -52138,7 +52138,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getUsers(token) {
       var _this3 = this;
 
-      _axios.default.get("https://ach2.herokuapp.com/users/".concat(localStorage.getItem('user')), {
+      _axios.default.get("https://ach2.herokuapp.com/users/".concat(localStorage.getItem("user")), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -52154,10 +52154,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       console.log(authData);
       this.setState({
         user: authData.user.Username
-      }); //this.props.setUser(authData.user);
+      }); // this.props.setUser(authData.user);
 
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.Username);
+      localStorage.setItem("token", authData.token);
+      localStorage.setItem("user", authData.user.Username);
       this.getMovies(authData.token);
       this.getUsers(authData.token);
     }
@@ -52520,7 +52520,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55184" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50088" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -52697,4 +52697,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
-//# sourceMappingURL=/client/src.78399e21.js.map
+//# sourceMappingURL=/src.78399e21.js.map
