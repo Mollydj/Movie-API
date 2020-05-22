@@ -12,7 +12,7 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const updateUser = (e) => {
+  const updateUser = e => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
     axios.post('https://ach2.herokuapp.com/users', {
       Username: username,
