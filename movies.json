@@ -1,0 +1,171 @@
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d51a"
+  },
+  "Title": "About Time",
+  "Description": "At the age of 21, Tim discovers he can travel in time and change what happens and has happened in his own life. ... So they meet for the first time again-and again-but finally, after a lot of cunning time-traveling, he wins her heart.",
+  "Genre": {
+    "Name": "Fantasy",
+    "Description": "Fantasy comedy or comic fantasy is a subgenre of fantasy that is primarily humorous in intent and tone. Typically set in imaginary worlds, fantasy comedy often includes puns on and parodies of other works of fantasy."
+  },
+  "Director": {
+    "Name": "Richard Curtis",
+    "Bio": "Richard Whalley Anthony Curtis, CBE, is a British screenwriter, producer, and film director. One of Britains most successful comedy screenwriters, he is known primarily for romantic comedy films, among them Four Weddings and a Funeral, Notting Hill, Bridget Joness Diary, Love Actually, and About Time.",
+    "Birth": "1956-11-8",
+    "Death": " - Present"
+  },
+  "ImagePath": "",
+  "Featured": true
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d51b"
+  },
+  "Title": "13 Going on 30",
+  "Description": "A girl who's sick of the social strictures of junior high is transformed into a grownup overnight. In this feel-good fairy tale, teenager Jenna wants a boyfriend, and when she's unable to find one, she fantasizes about being a well-adjusted adult. Suddenly, her secret desire becomes a reality, and she is transformed into a 30-year-old. But adulthood, with its own set of male-female challenges, isn't as easy as it looks.",
+  "Genre": {
+    "Name": "Fantasy",
+    "Description": "Fantasy comedy or comic fantasy is a subgenre of fantasy that is primarily humorous in intent and tone. Typically set in imaginary worlds, fantasy comedy often includes puns on and parodies of other works of fantasy."
+  },
+  "Director": {
+    "Name": "Gary Winick",
+    "Bio": "Gary Scott Winick was an American filmmaker whose movies as a director include Tadpole and 13 Going on 30, and who also produced such films as Pieces of April and November through his New York City-based independent film production company InDigEnt.",
+    "Birth": "1961-03-31",
+    "Death": " 2011-02-27"
+  },
+  "ImagePath": "",
+  "Featured": false
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d51c"
+  },
+  "Title": "Always Be My Maybe",
+  "Description": "Childhood sweethearts have a falling out and dont speak for 15 years, only reconnecting as adults when Sasha runs into Marcus in San Francisco. Although the old sparks are still there, the couple live in different worlds",
+  "Genre": {
+    "Name": "Comedy",
+    "Description": "Romantic comedy (portmanteaus: romedy, romcom, rom-com or lovecome) is a subgenre of comedy and slice-of-life fiction, focusing on lighthearted, humorous plot lines centered on romantic ideas, such as how true love is able to surmount most obstacles.["
+  },
+  "Director": {
+    "Name": "Nahnatchka Khan",
+    "Bio": "Nahnatchka Khan is an American television writer and producer. She attended the University of Southern Californias School of Cinematic Arts. Khans parents immigrated to the US from Iran. She was born in Las Vegas and grew up in Hawaii.",
+    "Birth": "1973",
+    "Death": " - Present"
+  },
+  "ImagePath": "",
+  "Featured": false
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d51d"
+  },
+  "Title": "Sleeping With Other People",
+  "Description": "Twelve years after a one-night stand, a man (Jason Sudeikis) and a woman (Alison Brie) run into each other and try to maintain a platonic relationship despite their mutual attraction.",
+  "Genre": {
+    "Name": "Comedy",
+    "Description": "Romantic comedy (portmanteaus: romedy, romcom, rom-com or lovecome) is a subgenre of comedy and slice-of-life fiction, focusing on lighthearted, humorous plot lines centered on romantic ideas, such as how true love is able to surmount most obstacles.["
+  },
+  "Director": {
+    "Name": "Leslye Headland",
+    "Bio": "Leslye Headland is an American playwright, screenwriter, and director. She is best known for the play and 2012 film Bachelorette and 2015 film Sleeping with Other People. She co-created the Netflix series Russian Doll, along with Natasha Lyonne and Amy Poehler. The series premiered on February 1, 2019",
+    "Birth": "1981",
+    "Death": " - Present  "
+  },
+  "ImagePath": "",
+  "Featured": false
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d51e"
+  },
+  "Title": "Amelie",
+  "Description": "Amélie is a fanciful comedy about a young woman who discretely orchestrates the lives of the people around her, creating a world exclusively of her own making. Shot in over 80 Parisian locations, acclaimed director Jean-Pierre Jeunet invokes his incomparable visionary style to capture the exquisite charm and mystery of modern-day Paris through the eyes of a beautiful ingenue.",
+  "Genre": {
+    "Name": "Comedy",
+    "Description": "Romantic comedy (portmanteaus: romedy, romcom, rom-com or lovecome) is a subgenre of comedy and slice-of-life fiction, focusing on lighthearted, humorous plot lines centered on romantic ideas, such as how true love is able to surmount most obstacles.["
+  },
+  "Director": {
+    "Name": "Jean-Pierre Jeunet",
+    "Bio": "Jean-Pierre Jeunet is a French film director, producer, and screenwriter. His films mix elements of fantasy, realism and science fiction either to create idealized realities or to give relevance to mundane situations. A former animator, his movies are marked by quirky, slapstick humor, alongside surrealist visuals",
+    "Birth": "1953",
+    "Death": " - Present"
+  },
+  "ImagePath": "",
+  "Featured": true
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d51f"
+  },
+  "Title": "Love Rosie",
+  "Description": "Best friends Rosie and Alex are suddenly separated when Alex and his family move from Dublin to America. Can their friendship survive years and miles? Will they gamble everything for true love?",
+  "Genre": {
+    "Name": "Dramedy",
+    "Description": "Comedy-drama or dramedy (a portmanteau of drama and comedy), is a genre in which plot elements are a combination of comedy and drama. It is a subgenre of contemporary tragicomedy."
+  },
+  "Director": {
+    "Name": "Christian Ditter",
+    "Bio": "Christian Ditter is an award winning director, producer and screenwriter who has worked on films, television and commercials. He is best known for his films The Crocodiles, Love, Rosie, How to Be Single, and the Netflix series Girlboss",
+    "Birth": "1977",
+    "Death": " - Present"
+  },
+  "ImagePath": "",
+  "Featured": false
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d520"
+  },
+  "Title": "500 Days of Summer",
+  "Description": "Tom (Joseph Gordon-Levitt), greeting-card writer and hopeless romantic, is caught completely off-guard when his girlfriend, Summer (Zooey Deschanel), suddenly dumps him. He reflects on their 500 days together to try to figure out where their love affair went sour, and in doing so, Tom rediscovers his true passions in life. ",
+  "Genre": {
+    "Name": "Dramedy",
+    "Description": "Comedy-drama or dramedy (a portmanteau of drama and comedy), is a genre in which plot elements are a combination of comedy and drama. It is a subgenre of contemporary tragicomedy."
+  },
+  "Director": {
+    "Name": "Marc Webb",
+    "Bio": "Marc Preston Webb[1] (born August 31, 1974) is an American music video director and filmmaker. He made his feature film directorial debut with the 2009 romantic comedy-drama 500 Days of Summer, and went on to direct the 2012 Spider-Man reboot The Amazing Spider-Man, its 2014 sequel, The Amazing Spider-Man 2, and the 2017 drama films Gifted and The Only Living Boy in New York.",
+    "Birth": "1974",
+    "Death": " - Present"
+  },
+  "ImagePath": "",
+  "Featured": false
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d521"
+  },
+  "Title": "Bridget Jones Diary",
+  "Description": "At the start of the New Year, 32-year-old Bridget (Renée Zellweger) decides its time to take control of her life -- and start keeping a diary. Now, the most provocative, erotic and hysterical book on her bedside table is the one shes writing. With a taste for adventure, and an opinion on every subject - from exercise to men to food to sex and everything in between - shes turning the page on a whole new life.",
+  "Genre": {
+    "Name": "Comedy",
+    "Description": "Romantic comedy (portmanteaus: romedy, romcom, rom-com or lovecome) is a subgenre of comedy and slice-of-life fiction, focusing on lighthearted, humorous plot lines centered on romantic ideas, such as how true love is able to surmount most obstacles.["
+  },
+  "Director": {
+    "Name": "Sharon Maguire",
+    "Bio": "Sharon Maguire (born 17 August 1960) is a film director who came to prominence with Bridget Joness Diary. The film was based on the book by her close friend Helen Fielding, and one of the main characters – 'Shazzer' – is allegedly based on Maguire",
+    "Birth": "1960",
+    "Death": " - Present"
+  },
+  "ImagePath": "",
+  "Featured": false
+}
+{
+  "_id": {
+    "$oid": "5e657a0d450140469f28d522"
+  },
+  "Title": "The Big Sick",
+  "Description": "Kumail is a Pakistani comic, who meets an American graduate student named Emily at one of his stand-up shows. As their relationship blossoms, he soon becomes worried about what his traditional Muslim parents will think of her. When Emily suddenly comes down with an illness that leaves her in a coma, Kumail finds himself developing a bond with her deeply concerned mother and father.",
+  "Genre": {
+    "Name": "Dramedy",
+    "Description": "Comedy-drama or dramedy (a portmanteau of drama and comedy), is a genre in which plot elements are a combination of comedy and drama. It is a subgenre of contemporary tragicomedy."
+  },
+  "Director": {
+    "Name": "Michael Showalter",
+    "Bio": "Michael Showalter is an American comedian, actor, director, writer, and producer. A member of the sketch comedy trio Stella, he first came to recognition as a cast member on MTVs The State, which aired from 1993 to 1995.",
+    "Birth": "1970",
+    "Death": " - Present"
+  },
+  "ImagePath": "",
+  "Featured": false
+}
