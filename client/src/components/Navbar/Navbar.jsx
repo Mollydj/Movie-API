@@ -11,7 +11,7 @@ export class NavBar extends React.Component {
 
     return (
       <Navbar bg="light" expand="sm">
-        <Navbar.Brand href="/client" className="fancy">My Flix</Navbar.Brand>
+        <Navbar.Brand href="/" className="fancy">My Flix</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
