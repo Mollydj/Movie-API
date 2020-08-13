@@ -55,6 +55,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "cssnano": "^4.1.10",
+    "jsdoc-jsx": "^0.1.0",
     "npm-start-command": "^1.0.1",
     "sass": "^1.26.7"
   },

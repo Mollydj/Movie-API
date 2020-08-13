@@ -44,6 +44,12 @@ export class MainView extends React.Component {
     }
   }
 
+  /**
+   * Main view of the site after authenticated and logged in
+   * @function getMovies
+   * @param {param} token Authentication token
+   * @return {object} All movies from database
+   */
   getMovies(token) {
     axios.get('https://ach2.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
