@@ -14,7 +14,7 @@ export function LoginView(props) {
   /**
    * Login View
    * @function handleSubmit
-   * @param {event} e Once button is clicked username and password are authenticated 
+   * @param {event} e Once button is clicked username and password are authenticated
    * @return {object} User information
    */
   const handleSubmit = (e) => {
