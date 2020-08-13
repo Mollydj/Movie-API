@@ -34,3 +34,5 @@ run `npm start`  to run the app locally
 
 ###### 3. Login as a user
 Create a new account by clicking 'Sign Up' on the home page to create your own personal login. 
+
+### Happy Hacking!
