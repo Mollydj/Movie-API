@@ -12,6 +12,13 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
+  /**
+ * Saves new user info in localstorage
+ * @function newUser
+ * @params e
+ * @axios 
+ * @returns {object} Object containing new user info
+ */
   const newUser = (e) => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
     axios.post('https://ach2.herokuapp.com/users', {

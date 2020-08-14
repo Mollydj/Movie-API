@@ -7,6 +7,11 @@ import Row from 'react-bootstrap/Row';
 
 import { connect } from 'react-redux';
 
+/**
+ * Loads all movies from favorite movies
+ * @function mapStateToProps
+ * @returns {state} Favorite movies selected by the user
+ */
 const mapStateToProps = state => {
   const { movies } = state;
   return { movies };
@@ -20,7 +25,15 @@ export function UpdateUser(props) {
   const [birthday, updateBirthday] = useState('');
 
 
-
+ /**
+   * Update user details
+   * @function updateUser
+   * @axios
+   * @param {string} username
+   * @param {string} password
+   * @param {string} email
+   * @param {date} birthday
+   */
   const updateUser = (e) => {
     e.preventDefault();
     axios.put(`https://ach2.herokuapp.com/users/${user}`, {

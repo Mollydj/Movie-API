@@ -1,4 +1,32 @@
-import React from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import Navbar from "react-bootstrap/Navbar";
@@ -103,51 +131,51 @@ export class MainView extends React.Component {
     let { user, profile } = this.state;
 
     return (
-      <Router basename="/client">
-        <Navbar expand="lg" variant="light" className="Navstyle">
-          <Container>
-            <Navbar.Brand href="/client" className="fancy">
+      &lt;Router basename="/client">
+        &lt;Navbar expand="lg" variant="light" className="Navstyle">
+          &lt;Container>
+            &lt;Navbar.Brand href="/client" className="fancy">
               Myflix{" "}
-            </Navbar.Brand>
-            <Link className="fancy" to={`/users/${user}`}>
+            &lt;/Navbar.Brand>
+            &lt;Link className="fancy" to={`/users/${user}`}>
               {" "}
               {user}{" "}
-            </Link>
-          </Container>
-        </Navbar>
-        <div className="main-view align justify-content-center">
-          <Row>
-            <Col>
-              <Route
+            &lt;/Link>
+          &lt;/Container>
+        &lt;/Navbar>
+        &lt;div className="main-view align justify-content-center">
+          &lt;Row>
+            &lt;Col>
+              &lt;Route
                 exact
                 path="/"
                 render={() => {
                   if (!user)
                     return (
-                      <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                      &lt;LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                     );
-                  return <MoviesList movies={movies} />;
+                  return &lt;MoviesList movies={movies} />;
                 }}
               />
-              <Route path="/register" render={() => <RegistrationView />} />
+              &lt;Route path="/register" render={() => &lt;RegistrationView />} />
 
-              <Route
+              &lt;Route
                 path="/movies/:movieId"
                 render={({ match }) => (
-                  <MovieView
+                  &lt;MovieView
                     movie={movies.find((m) => m._id === match.params.movieId)}
                   />
                 )}
               />
 
-              <Route
+              &lt;Route
                 exact
                 path="/genres/:name"
                 render={({ match }) => {
                   if (!movies || movies.length === 0)
-                    return <div className="main-view" />;
+                    return &lt;div className="main-view" />;
                   return (
-                    <GenreView
+                    &lt;GenreView
                       genre={
                         movies.find((m) => m.Genre.Name === match.params.name)
                           .Genre
@@ -158,14 +186,14 @@ export class MainView extends React.Component {
                 }}
               />
 
-              <Route
+              &lt;Route
                 exact
                 path="/directors/:name"
                 render={({ match }) => {
                   if (!movies || movies.length === 0)
-                    return <div className="main-view" />;
+                    return &lt;div className="main-view" />;
                   return (
-                    <DirectorView
+                    &lt;DirectorView
                       director={
                         movies.find(
                           (m) => m.Director.Name === match.params.name
@@ -177,27 +205,27 @@ export class MainView extends React.Component {
                 }}
               />
 
-              <Route
+              &lt;Route
                 exact
                 path="/users/:Username"
                 render={({ match }) => {
                   if (!user || user.length === 0)
-                    return <div className="main-view" />;
-                  return <ProfileView user={user} movies={movies} />;
+                    return &lt;div className="main-view" />;
+                  return &lt;ProfileView user={user} movies={movies} />;
                 }}
               />
 
-              <Route
+              &lt;Route
                 exact
                 path="/update/:Username"
-                render={() => <UpdateUser user={user} />}
+                render={() => &lt;UpdateUser user={user} />}
               />
 
-              <Route path="/logout" render={() => <LoginView />} />
-            </Col>
-          </Row>
-        </div>
-      </Router>
+              &lt;Route path="/logout" render={() => &lt;LoginView />} />
+            &lt;/Col>
+          &lt;/Row>
+        &lt;/div>
+      &lt;/Router>
     );
   }
 }
@@ -211,3 +239,26 @@ let mapStateToProps = (state) => {
 
 // #4
 export default connect(mapStateToProps, { setMovies, profile })(MainView);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Thu Aug 13 2020 22:09:25 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

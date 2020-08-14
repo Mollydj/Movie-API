@@ -17,6 +17,7 @@ export function LoginView(props) {
    * @param {event} e Once button is clicked username and password are authenticated
    * @return {object} User information
    */
+  
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents the default refresh of the page from your handlesubmit calling
     axios
